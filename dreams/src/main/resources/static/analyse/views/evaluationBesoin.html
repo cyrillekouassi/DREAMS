@@ -1,0 +1,64 @@
+<div class="card mt-5 mr-0 ml-0 mb-3">
+    <div class="card-body text-left">
+        <h3 class="text-center purple-text"><strong>Evaluation des Besoins</strong></h3>
+        <div class="aspece">
+            <table class="table table-bordered table-responsive mt-3 table-sm tableResp">
+                <thead class="blue-grey lighten-4 text-center">
+                <tr>
+                    <th>No</th>
+                    <th>Code identification Dreams</th>
+                    <th>Nom</th>
+                    <th>Prenoms</th>
+                    <th>Soutien psychosocial</th>
+                    <th>Education / alphabétisation</th>
+                    <th>Accès aux Préservatifs</th>
+                    <th>Contraception mixte</th>
+                    <th>Conseils et Dépistage VIH</th>
+                    <th>Soins post-VBG</th>
+                    <th>Sécurité alimentaire et nutrition</th>
+                    <th>Protection</th>
+                    <th>Parenting / caregiver programming</th>
+                </tr>
+                </thead>
+                <tbody class="text-center">
+                <tr ng-repeat="besoin in listBesoins">
+                    <th scope="row" class="align-middle">{{$index + 1}}</th>
+                    <th scope="row" class="align-middle">{{besoin.id_dreams.color}}</th>
+                    <th scope="row" class="align-middle">{{besoin.nom.color}}</th>
+                    <th scope="row" class="align-middle">{{besoin.pren.color}}</th>
+
+
+                    <td class="align-middle text-center" ng-style="{'background-color': besoin.psychoEvDB.color}">
+                        <strong>{{besoin.psychoEvDB.score}}</strong>
+                    </td>
+                    <td class="align-middle text-center" ng-style="{'background-color': besoin.educationEvDB.color}">
+                        <strong>{{besoin.educationEvDB.score}}</strong>
+                    </td>
+                    <td class="align-middle text-center" ng-style="{'background-color': besoin.preservatifEvDB.color}">
+                        <strong>{{besoin.preservatifEvDB.score}}</strong>
+                    </td>
+                    <td class="align-middle text-center"
+                        ng-style="{'background-color': besoin.contraceptionEvDB.color}">
+                        <strong>{{besoin.contraceptionEvDB.score}}</strong>
+                    </td>
+                    <td class="align-middle text-center" ng-style="{'background-color': besoin.conseilVIHEvDB.color}">
+                        <strong>{{besoin.conseilVIHEvDB.score}}</strong>
+                    </td>
+                    <td class="align-middle text-center" ng-style="{'background-color': besoin.soinsVBGEvDB.color}">
+                        <strong>{{besoin.soinsVBGEvDB.score}}</strong>
+                    </td>
+                    <td class="align-middle text-center" ng-style="{'background-color': besoin.alimentaireEvDB.color}">
+                        <strong>{{besoin.alimentaireEvDB.score}}</strong>
+                    </td>
+                    <td class="align-middle text-center" ng-style="{'background-color': besoin.protectionEvDB.color}">
+                        <strong>{{besoin.protectionEvDB.score}}</strong>
+                    </td>
+                    <td class="align-middle text-center" ng-style="{'background-color': besoin.parentingEvDB.color}">
+                        <strong>{{besoin.parentingEvDB.score}}</strong>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Roles</title>
+</head>
+<body>
+<body>
+<div class="row">
+    <div class="col-2">
+        <button class="btn btn-default" ng-click="afficheUserRoles = true">Tous les Roles utilisateurs</button>
+        <!--button-- class="btn btn-default" ng-click="afficheUserRoles = false">Tous les Roles Definies</button-->
+    </div>
+    <div class="col" ng-if="afficheUserRoles">
+        <div ng-if="!afficheSaisieRoles">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="table-wrapper-2">
+                        <h3>Liste des Roles Utilisateurs</h3>
+                        <button class="btn btn-default btn-rounded btn-sm float-right" ng-click="newRoles()">Creer Rôles</button>
+                        <!--Table-->
+                        <table class="table table-hover table-responsive-md">
+
+                            <!--Table head-->
+                            <thead class="blue lighten-4">
+                            <tr>
+                                <th>Nom</th>
+                                <th>Code</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead>
+                            <!--Table head-->
+
+                            <!--Table body-->
+                            <tbody>
+                            <tr ng-repeat="roles in rolesUsers">
+                                <th scope="row"><a ng-click="editRole(roles)"> {{roles.name}}</a></th>
+                                <th scope="row"><a> {{roles.code}}</a></th>
+                                <td>{{roles.description}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="mx-3">
+
+
+            </div>
+        </div>
+        <div ng-if="afficheSaisieRoles">
+            <div class="mx-3 my-2">
+                <div class="card">
+
+                    <!-- Card body -->
+                    <div class="card-body">
+                        <form>
+                            <p ng-if="afficheAjout" class="h4 text-center py-4">Nouveau Role Utilisateur</p>
+                            <p ng-if="!afficheAjout" class="h4 text-center py-4">Modifier Role Utilisateur</p>
+
+                            <div class="form-group mt-3">
+                                <input type="text" ng-model="role.name" class="form-control">
+                                <label>Nom</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" ng-model="role.code" class="form-control">
+                                <label>Code</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" ng-model="role.description" class="form-control">
+                                <label>Description</label>
+                            </div>
+                            <div class="form-group ">
+                                <div class="border border-info p-2">
+                                    <label>Roles appliqués</label>
+                                    <hr />
+                                    <div class="panelRolesDefinie mt-2 ml-3">
+                                        <div ng-repeat="defini in rolesDefinis">
+                                            <div class="form-check checkbox-warning-filled">
+                                                <input type="checkbox" id="{{defini.id}}" class="filled-in form-check-input" ng-model='defini[$index]' ng-change="autorise(defini.id)">
+                                                <label class="form-check-label" for="{{defini.id}}">{{defini.autorisation}}</label>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div>
+                                <button ng-if="!afficheAjout" class="btn btn-default" ng-click="ModifierRoles()">Modifier</button>
+                                <button ng-if="afficheAjout" class="btn btn-default" ng-click="ajouterRoles()">Ajouter</button>
+                                <button ng-click="annuler()">Annuler</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="col" ng-if="!afficheUserRoles">
+        <div ng-if="!afficheSaisieDefinie">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="table-wrapper-2">
+                        <h3>Liste des Roles Definis</h3>
+                        <button class="btn btn-default btn-rounded btn-sm float-right" ng-click="newDefini()">Definir Rôles</button>
+                        <!--Table-->
+                        <table class="table table-hover table-responsive-md">
+
+                            <!--Table head-->
+                            <thead class="blue lighten-4">
+                            <tr>
+                                <th>Autorisation</th>
+                            </tr>
+                            </thead>
+                            <!--Table head-->
+
+                            <!--Table body-->
+                            <tbody>
+                            <tr ng-repeat="defini in rolesDefinies">
+                                <th scope="row"><a ng-click="editDefinies(defini)"> {{defini.autorisation}}</a></th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="mx-3">
+
+
+            </div>
+        </div>
+        <!--<div ng-if="afficheSaisieDefinie">
+            <div class="mx-3 my-2">
+                <div class="card">
+
+                    <!-- Card body ->
+                    <div class="card-body">
+                        <form>
+                            <p ng-if="afficheAjoutDefine" class="h4 text-center py-4">Nouvelle Autorisation</p>
+                            <p ng-if="!afficheAjoutDefine" class="h4 text-center py-4">Modifier Autorisation</p>
+
+                            <div class="form-group mt-3">
+                                <input type="text" ng-model="defin.autorisation" class="form-control">
+                                <label>Autorisation</label>
+                            </div>
+
+
+                            <div>
+                                <button ng-if="!afficheAjoutDefine" class="btn btn-default" ng-click="ModifierAutorisation()">Modifier</button>
+                                <button ng-if="afficheAjoutDefine" class="btn btn-default" ng-click="ajouterAutorisation()">Ajouter</button>
+                                <button ng-click="annulerAutorisation()">Annuler</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>-->
+    </div>
+
+</div>
+</body>
+</body>
+</html>

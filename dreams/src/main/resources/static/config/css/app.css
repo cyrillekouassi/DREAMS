@@ -1,0 +1,31 @@
+.labelMarg{
+    margin-bottom: 0px;
+}
+.inputMarg{
+    margin-top: 0px;
+}
+.orgPanel{
+    height: 350px;
+    margin: 0px;
+    width: 220px;
+    background-color: white;
+    overflow:auto;
+    white-space: nowrap;
+    font-size: 0.9em;
+}
+.orgPanel1{
+    overflow:auto;
+    margin-left: 15px;
+    height: 350px;
+    white-space: nowrap;
+    font-size: 0.9em;
+}
+.orgContent{
+    background-color: white;
+}
+.w-auto {
+    width: auto;
+}
+.tableResp{
+    overflow-x:auto;
+}

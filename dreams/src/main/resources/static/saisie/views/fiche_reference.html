@@ -1,0 +1,475 @@
+
+    <div class="container-fluid">
+
+                    <div class="d-flex justify-content-center">
+                        <div class="btn btn-secondary ">
+                            <h5 class="white-text font-weight-bold">Fiche de Référence et Contre-référence</h5>
+                        </div>
+                </div>
+                <div class="row">
+                    <!--Panel-->
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <h4 class="card-header deep-orange lighten-1 white-text">Fiche de référence </h4>
+                            <div class="card-body">
+                                <form>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <label for="Nofiche" class="mt-3"><strong>Fiche de référence N °</strong></label>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="md-form mt-0">
+                                                    <input type="number" string-to-number ng-model='refData.numRef' ng-blur="saveValue('numRef',refData.numRef)" class="form-control" id="Nofiche">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="organisation" class="mb-0">Nom de l’organisation</label>
+                                        <div class="md-form mt-0">
+                                                <input type="text" ng-model='refData.nomOrganisation' ng-blur="saveValue('nomOrganisation',refData.nomOrganisation)" id="organisation" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label for="telOrg" >Téléphone </label>
+                                        <div class="md-form">
+                                            <input type="tel" string-to-number ng-model='refData.telRef' ng-blur="saveValue('telRef',refData.telRef)" id="telOrg" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="dateref" class="mb-0">Date de référence </label>
+                                        <div class="md-form mt-0 dates">
+                                            <input type="text" ng-model='refData.dateRef' ng-blur="saveValue('dateRef',refData.dateRef)" id="dateref" class="form-control ">
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label for="code">Code du bénéficiaire </label>
+                                        <div class="md-form">
+                                            <input type="text" ng-model='refData.id_dreams' ng-change="searchId(refData.id_dreams)" class="form-control mb-0">
+                                            <div class="list-group position-absolute mt-0" id="list-tab" role="tablist">
+                                                <a ng-repeat="value in valueComplete track by $index" ng-click="choisir(value)" class="list-group-item list-group-item-action text-left bgSearch" data-toggle="list" role="tab">{{value}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label for="nom" >Nom du  bénéficiaire  </label>
+                                        <div class="md-form">
+                                            <input type="text" ng-model='refData.nom' ng-blur="saveValue('nom',refData.nom)" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label for="pren" >Prénoms du  bénéficiaire </label>
+                                        <div class="md-form">
+                                            <input type="text" ng-model='refData.pren' ng-blur="saveValue('pren',refData.pren)" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label for="tel" >Contact du  bénéficiaire </label>
+                                        <div class="md-form">
+                                            <input type="tel" string-to-number ng-model='refData.tel' ng-blur="saveValue('tel',refData.tel)" id="tel" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label for="age" >Age </label>
+                                        <div class="md-form">
+                                            <input type="number" string-to-number ng-model='refData.agebenef' ng-blur="saveValue('agebenef',refData.agebenef)" id="age" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label for="combenef" >Commune </label>
+                                        <div class="md-form">
+                                            <input type="text" ng-model='refData.commune' ng-blur="saveValue('commune',refData.commune)" id="combenef" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label for="combenef" >Quartier </label>
+                                        <div class="md-form">
+                                            <input type="text" ng-model='refData.quartier' ng-blur="saveValue('quartier',refData.quartier)" id="quartbenef" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label for="telparent" >Contact du parent/tuteur </label>
+                                        <div class="md-form">
+                                            <input type="tel" string-to-number ng-model='refData.contparent' ng-blur="saveValue('contparent',refData.contparent)" id="telparent" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label for="nomstructure" >Nom de la structure d’accueil </label>
+                                        <div class="md-form">
+                                            <input type="text" ng-model='refData.nomstruc' ng-blur="saveValue('nomstruc',refData.nomstruc)" id="nomstructure" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label for="nomservic" class="mb-0">Nom du service d’accueil </label>
+                                        <div class="md-form mt-0">
+                                            <input id="nomservic" type="text" ng-model='refData.nomservice' ng-blur="saveValue('nomservice',refData.nomservice)" class="form-control">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group mt-5">
+                                        <div class="lead">
+                                            <span class="badge info-color-dark p-2">Motif de la référence </span>
+                                        </div>
+
+                                        <form class="form-inline">
+                            <div class="mt-2 ml-3">
+                                <div class="row">
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motReference.psycho' ng-change="changeMotif('psycho')" id="cref01">
+                                            <label class="form-check-label" for="cref01">
+                                                Soutien psycho social
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motReference.medical' ng-change="changeMotif('medical')"  id="cref02">
+                                            <label class="form-check-label" for="cref02">
+                                                Soutien médical post VBG
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motReference.juridique' ng-change="changeMotif('juridique')" id="cref03">
+                                            <label class="form-check-label" for="cref03">
+                                                Soutien juridique post VBG
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motReference.depistage' ng-change="changeMotif('depistage')" id="cref04">
+                                            <label class="form-check-label" for="cref04">
+                                                Dépistage VIH
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motReference.education' ng-change="changeMotif('education')" id="cref05">
+                                            <label class="form-check-label" for="cref05">
+                                                Soutien éducation
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motReference.economique' ng-change="changeMotif('economique')" id="cref06">
+                                            <label class="form-check-label" for="cref06">
+                                                Renforcement
+                                                économique des
+                                                ménages
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motReference.preservatif' ng-change="changeMotif('preservatif')" id="cref07">
+                                            <label class="form-check-label" for="cref07">
+                                                Accès aux
+                                                préservatifs
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motReference.pf' ng-change="changeMotif('pf')" id="cref08">
+                                            <label class="form-check-label" for="cref08">
+                                                Planning Familial
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motReference.alimentaire' ng-change="changeMotif('alimentaire')" id="cref09">
+                                            <label class="form-check-label" for="cref09">
+                                                Sécurité
+                                                alimentaire
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motReference.nutrition' ng-change="changeMotif('nutrition')" id="cref10">
+                                            <label class="form-check-label" for="cref10">
+                                                Nutrition
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motReference.autres' ng-change="changeMotif('autres')" id="cref11">
+                                            <label class="form-check-label" for="cref11">
+                                                Autre
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-0 mr-5">
+                                        <input type="text" ng-model='refData.autreMotifref' class="py-0" ng-if="motReference.autres"
+                                               placeholder="préciser autres motifs de reference" ng-blur="saveValue('autreMotifref',refData.autreMotifref)">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label for="nomPrenomMentor" >Nom & Prénoms du Mentor </label>
+                                        <div class="md-form">
+                                            <input type="text" ng-model='refData.nomprenmentor' ng-blur="saveValue('nomprenmentor',refData.nomprenmentor)" id="nomPrenomMentor" class="form-control">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.Panel-->
+
+                    <!--Panel-->
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <h4 class="card-header success-color lighten-1 white-text">Fiche de contre-référence</h4>
+                            <div class="card-body">
+                                <form>
+                                    <div class="form-group align-items-center">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label for="NoficheCR" class="mt-3"><strong>Fiche de contre-référence
+                                                    N °
+                                                </strong></label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="md-form mt-0">
+                                                    <input type="number" string-to-number ng-model='refData.numcontRef' ng-blur="saveValue('numcontRef',refData.numcontRef)" class="form-control" id="NoficheCR">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dateContreref" >Date de contre-référence </label>
+                                        <div class="md-form mt-0 dates">
+                                                <input type="text" ng-model='refData.datecontRef' ng-blur="saveValue('datecontRef',refData.datecontRef)" id="dateContreref" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="organisationCR" >Nom de l’organisation contre-référente</label>
+                                        <div class="md-form">
+                                            <input type="text" readonly ng-model='refData.nomstruc' ng-blur="saveValue('nomstruc',refData.nomstruc)" id="organisationCR" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mt-5">
+                                        <label for="nomservice">Nom du service d’accueil </label>
+                                        <div class="md-form">
+                                            <input type="text" readonly ng-model='refData.nomservice' ng-blur="saveValue('nomservice',refData.nomservice)" id="nomservice" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label for="contactCR">Contact du contre référent </label>
+                                        <div class="md-form">
+                                            <input type="tel" ng-model='refData.contcontRef' ng-blur="saveValue('contcontRef',contData.contcontRef)" id="contactCR" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mt-5">
+                                        <label for="nomOng" >Nom de l’ONG de la Mentor référente  </label>
+                                        <div class="md-form">
+                                            <input type="text" readonly ng-model='refData.nomOrganisation' id="nomOng" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label for="nomMentorRef" >Nom de la Mentor référente </label>
+                                        <div class="md-form">
+                                            <input type="text" readonly ng-model='refData.nomprenmentor' id="nomMentorRef" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label>Code du bénéficiaire </label>
+                                        <div class="md-form">
+                                            <input type="text" ng-model='refData.id_dreams' disabled id="code" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label >Nom du  bénéficiaire </label>
+                                        <div class="md-form">
+                                            <input type="text" ng-model='refData.nom' readonly="readonly" id="nom" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <label>Prénoms du  bénéficiaire </label>
+                                        <div class="md-form">
+                                            <input type="text" ng-model='refData.pren' readonly id="pren" class="form-control">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group mt-5">
+                                        <div class="lead">
+                                            <span class="badge info-color-dark p-2">Service offert </span>
+                                        </div>
+
+                         <form class="form-inline">
+                            <div class="mt-2 ml-3">
+                                <div class="row">
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='service.psycho' ng-change="changeMotif('psycho')" id="serv01">
+                                            <label class="form-check-label" for="serv01">
+                                                Soutien psycho social
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='service.medical' ng-change="changeMotif('medical')"  id="serv02">
+                                            <label class="form-check-label" for="serv02">
+                                                Soutien médical post VBG
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='service.juridique' ng-change="changeMotif('juridique')" id="serv03">
+                                            <label class="form-check-label" for="serv03">
+                                                Soutien juridique post VBG
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='service.depistage' ng-change="changeMotif('depistage')" id="serv04">
+                                            <label class="form-check-label" for="serv04">
+                                                Dépistage VIH
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='service.education' ng-change="changeMotif('education')" id="serv05">
+                                            <label class="form-check-label" for="serv05">
+                                                Soutien éducation
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='service.economique' ng-change="changeMotif('economique')" id="serv06">
+                                            <label class="form-check-label" for="serv06">
+                                                Renforcement
+                                                économique des
+                                                ménages
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='service.preservatif' ng-change="changeMotif('preservatif')" id="serv07">
+                                            <label class="form-check-label" for="serv07">
+                                                Accès aux
+                                                préservatifs
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='service.pf' ng-change="changeMotif('pf')" id="serv08">
+                                            <label class="form-check-label" for="serv08">
+                                                Planning Familial
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='service.alimentaire' ng-change="changeMotif('alimentaire')" id="serv09">
+                                            <label class="form-check-label" for="serv09">
+                                                Sécurité
+                                                alimentaire
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='service.nutrition' ng-change="changeMotif('nutrition')" id="serv10">
+                                            <label class="form-check-label" for="serv10">
+                                                Nutrition
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='service.autre' ng-change="changeMotif('autre')" id="serv11">
+                                            <label class="form-check-label" for="serv11">
+                                                Autre
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-0 mr-5">
+                                      <input type="text" ng-model='refData.autreServiceOff' class="py-0" ng-if="service.autre"
+                                               placeholder="préciser autres services offets" ng-blur="saveValue('autreServiceOff',refData.autreServiceOff)">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                                    </div>
+                                    <div class="form-group mt-5">
+                                            <span class="badge info-color-dark p-2">Observations du contre-référent </span>
+                                            <textarea ng-model='refData.obscontRef' ng-blur="saveValue('obscontRef',refData.obscontRef)" id="textarea-char-counter" class="form-control md-textarea" length="120" rows="3"></textarea>
+                                    </div>
+
+                                    <div class="form-group mt-5">
+                                        <label for="nomPrenomCR" >Nom & Prénoms du contre-référent </label>
+                                        <div class="md-form">
+                                            <input type="text" ng-model='refData.nomprencontRef' ng-blur="saveValue('nomprencontRef',refData.nomprencontRef)" id="nomPrenomCR" class="form-control">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.Panel-->
+                </div>
+                <div class="espacemt"></div>
+                <div class="card secondary-color">
+                    <div class="card-body">
+                        <button class="btn btn-primary" ng-click="saveREF()">Enregistrer </button>
+                        <a ui-sref="ficheReferenceList({org: orgUnitSelect.id })" class="btn btn-blue-grey">Annuler </a>
+                    </div>
+                </div>
+
+        </div>
+
+<footer>
+
+</footer>
+    <script>
+
+        $(function () {
+
+            $('.dates input').datepicker({
+                format: "dd-mm-yyyy",
+                weekStart: 1,
+                todayBtn: "linked",
+                clearBtn: true,
+                language: "fr",
+                daysOfWeekHighlighted: "0,6",
+                autoclose: true,
+                todayHighlight: true
+            });
+        });
+    </script>

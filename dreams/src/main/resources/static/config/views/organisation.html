@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Organisation</title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <div>
+                <div>
+                    <div class="card card-cascade narrower w-100">
+                        <div class="gradient-card-header info-color"><p
+                                class="h5 mb-0 p-2 text-center white-text">Hierachie des organisations</p></div>
+                        <div class="card-body text-left">
+                            <div>
+
+                                <div class="orgPanel1 text-info mt-0 pt-0">
+                                    <org-tree org-data="arbre" multi-select="false"
+                                              get-allselect="toutes_les_donnees(lesSelects)"></org-tree>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col" ng-if="!affichesaisie">
+
+            <div class="card">
+                <h4 class="card-header text-center font-weight-bold text-uppercase py-4">Organisation</h4>
+                <div class="card-body">
+                    <div id="table" class="table-editable">
+                        <span class="table-add float-right mb-3 mr-2"><a ng-click="Ajouter()" class="text-success"><i
+                                class="fa fa-plus fa-2x" aria-hidden="true"></i></a></span>
+                        <table class="table table-bordered table-responsive-md table-striped text-center">
+
+                            <!--Table head-->
+                            <thead class="blue-grey lighten-4">
+                            <tr>
+                                <th>Nom</th>
+                                <th>code</th>
+                                <th>ONG</th>
+                                <th>partenaire</th>
+                                <th>niveau</th>
+                            </tr>
+                            </thead>
+                            <!--Table head-->
+
+                            <!--Table body-->
+                            <tbody>
+                            <tr ng-repeat="enf in enfants track by enf.id">
+                                <th scope="row"><a ng-click="modifierOrg(enf)"> {{enf.name}}</a></th>
+                                <td>{{enf.code}}</td>
+                                <td>{{enf.organisationLocal}}</td>
+                                <td>{{enf.partenaire}}</td>
+                                <td>{{enf.level}}</td>
+                            </tr>
+                            </tbody>
+                            <!--Table body-->
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col" ng-if="affichesaisie">
+            <div class="card">
+
+                <!-- Card body -->
+                <div class="card-body">
+                    <form>
+                        <p ng-if="afficheAjout" class="h4 text-center py-4">Ajouter une organisation</p>
+                        <p ng-if="!afficheAjout" class="h4 text-center py-4">Modifier l'organisation</p>
+
+                        <div class="form-group mt-3">
+                            <input type="text" ng-model="org.leparent" class="form-control">
+                            <label>Parent</label>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <input type="text" ng-model="org.name" class="form-control">
+                                    <label>Nom<span>*</span></label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" ng-model="org.code" class="form-control">
+                                    <label>Code<span>*</span></label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" ng-model="org.sigle" class="form-control">
+                                    <label>Sigle</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" ng-model="org.dateFermeture" class="form-control">
+                                    <label>Date de Fermeture</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" ng-model="org.description" class="form-control">
+                                    <label>Description</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" ng-model="org.email" class="form-control">
+                                    <label>Email</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" ng-model="org.telephone" class="form-control">
+                                    <label>Telephone</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input type="text" ng-model="org.region" class="form-control">
+                                    <label>Region</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" ng-model="org.departement" class="form-control">
+                                    <label>Departement</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" ng-model="org.sousPrefecture" class="form-control">
+                                    <label>Sous-Préfecture</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" ng-model="org.commune" class="form-control">
+                                    <label>Commune</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" ng-model="org.quartier" class="form-control">
+                                    <label>Quartier</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" ng-model="org.partenaire" class="form-control">
+                                    <label>Partenaire</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" ng-model="org.organisationLocal" class="form-control">
+                                    <label>Organisation Local</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <button ng-if="!afficheAjout" ng-click="appliqModif()">Modifier</button>
+                            <button ng-if="afficheAjout" ng-click="ajouterOrg()">Ajouter</button>
+                            <button ng-click="annuler()">Annuler</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

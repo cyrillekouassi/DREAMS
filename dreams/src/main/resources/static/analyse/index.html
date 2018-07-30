@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="../_lib/font-awesome/css/font-awesome.min.css">
+    <link href="../_lib/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../_lib/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_lib/datepicker/bootstrap-datepicker.min.css">
+    <link href="../_lib/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_css/app.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/tree.css">
+
+</head>
+
+<body ng-app="analyse">
+
+<!--Main Navigation-->
+<header>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark pink scrolling-navbar">
+        <!--a class="navbar-brand" href="#"><strong>Navbar</strong></a-->
+        <a class="navbar-brand img-responsive" href="#"><img src="../_img/entete/logo_DREAMS.png"
+                                                             alt="DREAMS CÔTE D'IVOIRE"
+                                                             style="height: 25px; "></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">DREAMS CÔTE D'IVOIRE<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item" ng-if="role.affiche_saisie">
+                    <a class="nav-link" href="{{baseUrl+'saisie/index.html'}}">Saisie</a>
+                </li>
+                <li class="nav-item bg-menu" ng-if="role.affiche_analyse">
+                    <a class="nav-link" href="{{baseUrl+'analyse/index.html'}}">Analyse</a>
+                </li>
+                <li class="nav-item" ng-if="role.affiche_configuration">
+                    <a class="nav-link" href="{{baseUrl+'config/index.html'}}">Configuration</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav nav-flex-icons">
+                <li class="nav-item m-0 p-0">
+                    <img src="../_img/profil/user-female.png" alt="..." class="rounded-circle"
+                         style="width: 35px; height: 35px; margin: auto" size="32">
+                    <img src="../_img/profil/user-male.png" alt="..." class="rounded-circle"
+                         style="width: 35px; height: 35px; margin: auto" size="32">
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><span class="font-italic">Bonjour</span><strong> {{Me.name}}</strong></a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" ng-click="logout()" href="">Deconnexion</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+</header>
+<!--Main Navigation-->
+<main ng-if="role.affiche_analyse" class="mt-4 pt-5">
+
+    <div class="row mx-0 px-0">
+        <div class="col-3 mx-0 px-0 position-fixed" style="overflow:auto;">
+        <div class="">
+
+            <div>
+                <img src="../_img/entete/carte.jpg" alt="..."
+                     style="width: 100%; height: 100px; margin: auto" size="32">
+            </div>
+
+            <div class="card card-cascade">
+
+                <div class="view view-cascade gradient-card-header peach-gradient mb-0 pb-0">
+                    <h5 class="card-header-title mb-3">Analyse des Activitées DREAMS</h5>
+                </div>
+
+                <div class="card-body card-body-cascade text-center px-0 py-0 mt-0 mx-0">
+                    <!--Accordion wrapper-->
+                    <div class="accordion accordion-1" id="accordionEx23" role="tablist">
+                        <div class="card">
+                            <div class="card-header blue lighten-3 z-depth-1" role="tab" id="heading96">
+                                <h5 class="text-uppercase mb-0 py-1">
+                                    <a class="white-text font-weight-bold" data-toggle="collapse" href="#collapse96" ng-click="voletRapport()" aria-expanded="true" aria-controls="collapse96">
+                                        Indicateurs du rapport
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse96" class="collapse show" role="tabpanel" aria-labelledby="heading96" data-parent="#accordionEx23">
+                                <div class="card-body text-left m-0 p-0">
+                                    <div class="grey lighten-1">
+                                        <div class="row p-0">
+                                            <div class="col">
+                                                <label class="mt-3"><strong>Selectionner l'indicateur</strong></label>
+                                            </div>
+                                            <div class="col">
+                                                <div class="d-flex justify-content-end mt-3">
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="filled-in form-check-input" ng-model="lecheckbox" id="defaultUnchecked" ng-change="showDetails(lecheckbox)">
+                                                        <label class="custom-control-label" for="defaultUnchecked">Details</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="indicateurPanel">
+                                        <div ng-repeat="indcateur in collectIndicateurs" class="m-2">
+                                            <a ng-dblclick="SelectIndicateur(indcateur,$index)">{{indcateur.name}}</a>
+                                        </div>
+                                    </div>
+                                    <div class="grey lighten-1">
+                                        <label class=""><strong>les indicateurs selectionés</strong></label>
+                                    </div>
+                                    <div class="indicateurPanel">
+                                        <div ng-repeat="indcateur in collectIndicateursSeclect" class="m-2">
+                                            <a ng-dblclick="indicateurSelected(indcateur,$index)">{{indcateur.name}}</a>
+                                        </div>
+                                    </div>
+                                    <div class="blue-gradient">
+                                        <label class=""><strong>Periode</strong></label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input class="form-check-input" name="typePeriode" type="radio"
+                                                       id="radio201" value="mois" ng-model="laperiode" ng-change="periodeSelected(laperiode,annee)">
+                                                <label class="form-check-label" for="radio201">Mensuel</label>
+                                            </div>
+                                        </div>
+                                        <div class="col m-0 p-0">
+                                            <div class="form-check">
+                                                <input class="form-check-input" name="typePeriode" type="radio"
+                                                       id="radio202" value="trimestre" ng-model="laperiode" ng-change="periodeSelected(laperiode,annee)">
+                                                <label class="form-check-label" for="radio202">Trimestriel</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col m-0 p-0">
+                                            <button class="btn peach-gradient btn-block btn-sm m-0" type="submit" ng-click="anneePreced(laperiode)">
+                                                <i class="icon-chevron-left m-0"></i> Prev
+                                            </button>
+                                        </div>
+                                        <div class="col m-0 p-0">
+                                            <button class="btn peach-gradient btn-block btn-sm m-0" type="submit" ng-click="anneeSuivant(laperiode)">
+                                                Next <i class="icon-chevron-right"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div style="border-top: black solid 1px;">
+                                        <div style="margin: 0px; padding: 0px;">
+
+                                                <div ng-repeat="periode in ListPeriode" class="pointerList">
+                                                    <a class="m-1" href="" ng-dblclick="periodeSelectionner(periode,$index)">{{periode.name}}</a>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="border border-dark light-blue">
+                                        <label class=""><strong>Periode selectionnée</strong></label>
+                                    </div>
+                                    <div class="perioSelectPanel" style="margin: 0px; padding: 0px">
+                                        <div ng-repeat="periode in periodeSelect" class="pointerList">
+                                        <a class="m-1" href="" ng-dblclick="deletePeriode(periode,$index)">{{periode.name}}</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header blue lighten-3 z-depth-1" role="tab" id="heading97">
+                                <h5 class="text-uppercase mb-0 py-1">
+                                    <a class="collapsed font-weight-bold white-text" ng-click="voletActivite()" data-toggle="collapse" href="#collapse97" aria-expanded="false" aria-controls="collapse97">
+                                        Activités DREAMS
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse97" class="collapse" role="tabpanel" aria-labelledby="heading97" data-parent="#accordionEx23">
+                                <div class="card-body p-0">
+                                    <div class="list-group m-0 p-0" id="list-tab" role="tablist">
+                                        <a ng-repeat="prog in programme" class="list-group-item list-group-item-action text-left" ng-class="{active: pageActive==prog.code}" id="prog.id" data-toggle="list" role="tab" ng-click="programmeClick(prog)">{{prog.name}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        </div>
+
+        <div class="col mx-0 px-0" style="overflow:auto;">
+           <div class="card p-0">
+                <div class="card-body text-left p-0">
+                    <div class="row mt-0 pt-0">
+                        <div class="col-3 ml-2 mt-0 pt-0">
+                            <div class="border border-primary">
+                                <div class="d-flex primary-color p-2"><span
+                                        class="text-center white-text">Organisation</span></div>
+                                <div>
+                                    <p></p>
+                                    <div>
+                                        <span class="ml-2" ng-if="!orgUnitSelect.name"><strong> Selectionner l'organisation</strong></span>
+                                        <span ng-if="orgUnitSelect.name" class="orgtext"><strong class="ml-2"> {{orgUnitSelect.name}}</strong></span>
+                                        <a ng-if="!afficheOrg" class="float-right mr-1" ng-click="listArbre()"><i
+                                                class="fa fa-arrows-alt fa-lg indigo-text"
+                                                aria-hidden="true"></i></a>
+                                        <div class="position-absolute bg-Org" ng-if="afficheOrg">
+                                            <div class="orgPanel text-info mt-1 pt-0">
+                                                <org-tree class="ml-3" org-data="arbre" multi-select="false"
+                                                          get-allselect="organisationSelected(lesSelects)"></org-tree>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-6 ml-2 mt-0 pt-0" ng-if="!analyseRapport">
+
+                            <div class="border border-primary">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <div class="d-flex align-items-start primary-color p-2">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-flat dropdown-toggle m-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" ng-click="selectTremestre()">trimestre</a>
+                                                    <a class="dropdown-item" ng-click="selectMois()">Mois</a>
+                                                    <a class="dropdown-item" ng-click="selectInterval()" ng-if="!rapportPeriod">Interval</a>
+                                                    <a class="dropdown-item" ng-click="selectJour()" ng-if="!rapportPeriod">Jour</a>
+                                                </div>
+                                            </div>
+                                            <span class="text-center white-text ml-2">Période</span>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="period">
+                                            <p></p>
+
+                                                <div ng-if="trimestre">
+                                                    <div class="row justify-content-end">
+                                                        <div class="col">
+                                                            <select class="mdb-select" ng-model="trim" ng-change="changeTrimestre(trim)" style="width: 300px;">
+                                                                <option ng-repeat="debuts in periodTrimestre" value="{{debuts.debut}}">{{debuts.name}}</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-4">
+                                                <span class="float-right mr-1">
+                                                <button ng-click="prev('debut')"><span class="glyphicon glyphicon-chevron-left">prev</span></button><button ng-click="next('debut')"><span class="glyphicon glyphicon-chevron-right">next</span></button>
+                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div ng-if="mois">
+                                                    <div class="row justify-content-end">
+                                                        <div class="col">
+                                                            <select class="mdb-select" ng-model="mois" ng-change="changeMois(mois)" style="width: 250px;">
+                                                                <option ng-repeat="debuts in periodMois" value="{{debuts.debut}}">{{debuts.name}}</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <button ng-click="prev('debut')"><span class="glyphicon glyphicon-chevron-left">prev</span></button><button ng-click="next('debut')"><span class="glyphicon glyphicon-chevron-right">next</span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div ng-if="interval">
+                                                    <div class="row mx-0 px-0 my-0 py-0">
+                                                        <div class="col-auto ml-1 mr-0 px-0 my-0 py-0">
+                                                            <div class="md-form mx-0 px-0 my-0 py-0 dates">
+                                                                <input type="text" id="laDate1" style="width: 100px;" ng-model="inter.debut" ng-change="changeInterval('debut',inter.debut)"
+                                                                       class="form-control">
+                                                                <label for="laDate1" class="font-weight-light">Date debut</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <span class="align-bottom" >à</span>
+                                                        </div>
+                                                        <div class="col-auto mx-0 px-0 my-0 py-0">
+                                                            <div class="md-form mx-0 px-0 my-0 py-0 dates">
+                                                                <input type="text" id="laDate2" style="width: 100px;" ng-model="inter.fin" ng-change="changeInterval('fin',inter.fin)"
+                                                                       class="form-control">
+                                                                <label for="laDate2" class="font-weight-light">Date fin</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div ng-if="jour">
+                                                    <div class="md-form dates ml-2 mr-2 px-0 my-0 py-0" style="margin: auto" >
+                                                        <input type="text" id="laDate" ng-model="lejour" ng-change="changeJour(lejour)"
+                                                               class="form-control">
+                                                        <label for="laDate" class="font-weight-light">Date</label>
+                                                    </div>
+                                                </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col">
+                            <button type="button" class="btn btn-outline-success waves-effect" ng-click="execution()">Executer</button>
+                            <div><a class="outline-success waves-effectk" ng-click="exportToExcel('#tableToExport')">
+                                Exporter en Excel
+                            </a></div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="zoneFixe" id="tableToExport">
+                <ui-view></ui-view>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</main>
+<footer>
+</footer>
+
+<script type="text/javascript" src="../_lib/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../_lib/js/popper.min.js"></script>
+<script type="text/javascript" src="../_lib/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../_lib/js/mdb.min.js"></script>
+
+<script src="../_lib/datepicker/bootstrap-datepicker.min.js"></script>
+<script src="../_lib/datepicker/bootstrap-datepicker.fr.min.js"></script>
+<script src="../_lib/angular/angular.min.js"></script>
+<script src="../_lib/angular/angular-animate.min.js"></script>
+<script src="../_lib/angular/angular-ui-router.min.js"></script>
+<script src="../_lib/angular/angular-aria.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/controllers/enrolementCTRL.js"></script>
+<script src="js/controllers/evaluationBesoinCTRL.js"></script>
+<script src="js/controllers/vadCTRL.js"></script>
+<script src="js/controllers/referenceCTRL.js"></script>
+<script src="js/controllers/groupeCTRL.js"></script>
+<script src="js/controllers/rapportCTRL.js"></script>
+<script src="js/controllers/accueilCTRL.js"></script>
+<script src="js/directives/tree_Directive.js"></script>
+<script src="js/sevices/Excel.js"></script>
+
+</body>
+
+</html>

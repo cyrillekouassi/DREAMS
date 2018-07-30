@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Saisie Visite A Domicile</title>
+</head>
+<body>
+<main>
+    <div class="container">
+        <div class="card">
+            <div class="view gradient-card-header purple-gradient">
+                <div class="modal-header info-color white-text">
+                    <h4 class="title">
+                        <i class="fa fa-pencil"></i> Visite A Domicile</h4>
+                </div>
+            </div>
+
+            <!-- Card body -->
+            <div class="card-body">
+
+
+                <form>
+                    <p class="h4 text-center py-4">FICHE DE COMPTE RENDU DE LA VAD DREAMS</p>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label for="numFiche" class="font-weight-light labelMarg">Numéro de la
+                                    Fiche </label>
+                                <div class="md-form mt-0">
+                                    <input type="text" id="numFiche" ng-model='vadData.numFicheVAD' ng-blur="saveValue('numFicheVAD',vadData.numFicheVAD)"
+                                           class="form-control inputMarg">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label for="laDate" class="font-weight-light labelMarg">Date </label>
+                                <div class="md-form mt-0 dates">
+                                    <input type="text" id="laDate" ng-model='vadData.dateVAD'
+                                           ng-blur="saveValue('dateVAD',vadData.dateVAD)" class="form-control inputMarg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label for="lieu" class="font-weight-light labelMarg">Lieu </label>
+                                <div class="md-form mt-0">
+                                    <input type="text" id="lieu" ng-model='vadData.lieuVAD'
+                                           class="form-control inputMarg" ng-blur="saveValue('lieuVAD',vadData.lieuVAD)">
+                                </div>
+                            </div>
+                            <div class="col">
+
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="debut" class="font-weight-light labelMarg">Heure de début </label>
+                                        <div class="md-form mt-0">
+                                            <input type="text" ng-model='vadData.heureDebutVAD' id="debut"
+                                                   class="form-control datetimepicker-input inputMarg"
+                                                   data-toggle="datetimepicker" data-target="#debut" ng-blur="saveValue('heureDebutVAD',vadData.heureDebutVAD)">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <label for="Fin" class="font-weight-light labelMarg">Heure de fin</label>
+                                        <div class="md-form mt-0">
+                                            <input type="text" ng-model='vadData.heureFinVAD' id="Fin"
+                                                   class="form-control inputMarg" ng-blur="saveValue('heureFinVAD',vadData.heureFinVAD)">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--label for="codeBenef" class="font-weight-light labelMarg">Code de la bénéficiaire </label>
+                    <div class="md-form mt-0">
+                        <input type="text" ng-model='vadData.id_dreams' id="codeBenef" ng-change="searchId('id_dreams',vadData.id_dreams)" class="form-control inputMarg" ng-blur="saveValue('id_dreams',vadData.id_dreams)">
+                    </div-->
+                    <label for="codeBenef" class="font-weight-light labelMarg">Code de la bénéficiaire </label>
+                    <input type="text" id="codeBenef" ng-model="vadData.id_dreams" ng-keyup="complete(vadData.id_dreams)" class="form-control mb-0" ng-change="searchId('id_dreams',vadData.id_dreams)"/>
+                    <div class="list-group position-absolute mt-0" id="list-tab" role="tablist">
+                        <a ng-repeat="value in valueComplete track by $index" ng-click="fillTextbox(value)" class="list-group-item list-group-item-action text-left bgSearch" data-toggle="list" role="tab">{{value}}</a>
+                    </div>
+
+
+                    <label for="nomBenef" class="font-weight-light labelMarg mt-5">Nom de la bénéficiaire
+                        rencontrée</label>
+                    <div class="md-form mt-0">
+                        <input type="text" id="nomBenef" ng-model='vadData.nomBeneficiaire' disabled
+                               class="form-control inputMarg" ng-blur="saveValue('nomBeneficiaire',vadData.nomBeneficiaire)">
+                    </div>
+
+
+                    <label for="nomEspace" class="font-weight-light labelMarg">Nom de l’espace sûr </label>
+                    <div class="md-form mt-0">
+                        <input type="text" id="nomEspace" ng-model='vadData.nomSafespace' disabled
+                               class="form-control inputMarg" ng-blur="saveValue('nomSafespace',vadData.nomSafespace)">
+                    </div>
+
+                    <div class="form-group mt-5">
+                        <div class="lead">
+                            <span class="badge info-color-dark p-2">Motif de la visite à domicile</span>
+                        </div>
+
+                        <form class="form-inline">
+                            <div class="mt-2 ml-3">
+                                <div class="row">
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motif.psycho' ng-change="changeMotif('psycho')" id="cc01">
+                                            <label class="form-check-label" for="cc01">
+                                                Soutien psycho social
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motif.medical' value="" id="c02">
+                                            <label class="form-check-label" for="c02">
+                                                Soutien médical post VBG
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motif.juridique' value="" id="c03">
+                                            <label class="form-check-label" for="c03">
+                                                Soutien juridique post VBG
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motif.depistage' value="" id="c04">
+                                            <label class="form-check-label" for="c04">
+                                                Dépistage VIH
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motif.education' value="" id="c05">
+                                            <label class="form-check-label" for="c05">
+                                                Soutien éducation
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motif.economique' value="" id="c06">
+                                            <label class="form-check-label" for="c06">
+                                                Renforcement
+                                                économique des
+                                                ménages
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motif.preservatif' value="" id="c07">
+                                            <label class="form-check-label" for="c07">
+                                                Accès aux
+                                                préservatifs
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motif.pf' value="" id="c08">
+                                            <label class="form-check-label" for="c08">
+                                                Planning Familial
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motif.alimentaire' value="" id="c09">
+                                            <label class="form-check-label" for="c09">
+                                                Sécurité
+                                                alimentaire
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motif.nutrition' value="" id="c10">
+                                            <label class="form-check-label" for="c10">
+                                                Nutrition
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-1 mr-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model='motif.autre' value="" id="c11">
+                                            <label class="form-check-label" for="c11">
+                                                Autre
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto m-0 p-0 mt-0 mr-5">
+                                        <input type="text" ng-model='vadData.Autremotif' class="py-0" ng-if="motif.autre"
+                                               placeholder="préciser autres motifs" ng-blur="saveValue('Autremotif',vadData.Autremotif)">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="naratif">NARRATIFS </label>
+                            <textarea class="form-control" ng-model='vadData.narratfs' id="naratif" rows="5" ng-blur="saveValue('narratfs',vadData.narratfs)"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="difficultes">DIFFICULTES RENCONTREES </label>
+                                    <textarea ng-model='vadData.difficultes' class="form-control" id="difficultes"
+                                              rows="5" ng-blur="saveValue('difficultes',vadData.difficultes)"></textarea>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="solution">SOLUTIONS APPORTEES </label>
+                                    <textarea ng-model='vadData.solution' class="form-control" id="solution"
+                                              rows="5" ng-blur="saveValue('solution',vadData.solution)"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="h6 text-center py-4">PERSONNES RENCONTREES </p>
+                        <div>
+                            <!--Table-->
+                            <table class="table table-responsive table-bordered table-responsive-md">
+
+                                <!--Table head-->
+                                <thead class="amber lighten-3">
+                                <tr>
+                                    <th rowspan="2" colspan="2" class="text-center"></th>
+                                    <th colspan="4" class="text-center">NOUVEAUX</th>
+                                    <th colspan="4" class="text-center">ANCIENS</th>
+                                </tr>
+                                <tr class="text-center">
+                                    <th><10 ans</th>
+                                    <th>10-14 ans</th>
+                                    <th>15-19 ans</th>
+                                    <th>>19 ans</th>
+                                    <th><10 ans</th>
+                                    <th>10-14 ans</th>
+                                    <th>15-19 ans</th>
+                                    <th>>19 ans</th>
+                                </tr>
+                                </thead>
+                                <!--Table head-->
+
+                                <!--Table body-->
+                                <tbody>
+                                <tr>
+                                    <th colspan="2" class="align-middle text-center">
+                                        <label class="label-table">FILLES DREAMS</label>
+                                    </th>
+                                    <td>
+                                        <!--div-- class="md-form mt-auto">
+                                            <input type="number" disabled class="form-control text-center">
+                                        </div-->
+                                    </td>
+                                    <td>
+                                        <div class="md-form mt-auto">
+                                            <input type="number" ng-model='vadData.ancFille_10_14' string-to-number
+                                                   class="form-control text-center" ng-blur="saveValue('ancFille_10_14',vadData.ancFille_10_14)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="md-form mt-auto">
+                                            <input type="number" ng-model='vadData.ancFille_15_19' string-to-number
+                                                   class="form-control text-center" ng-blur="saveValue('ancFille_15_19',vadData.ancFille_15_19)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <!--div class="md-form mt-auto">
+                                            <input type="number" disabled class="form-control text-center">
+                                        </div-->
+                                    </td>
+                                    <td>
+                                        <!--div class="md-form mt-auto">
+                                            <input type="number" disabled class="form-control text-center">
+                                        </div-->
+                                    </td>
+                                    <td>
+                                        <div class="md-form mt-auto">
+                                            <input type="number" ng-model='vadData.nouvFille_10_14' string-to-number
+                                                   class="form-control text-center" ng-blur="saveValue('nouvFille_10_14',vadData.nouvFille_10_14)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="md-form mt-auto">
+                                            <input type="number" ng-model='vadData.nouvFille_15_19' string-to-number
+                                                   class="form-control text-center" ng-blur="saveValue('nouvFille_15_19',vadData.nouvFille_15_19)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <!--div class="md-form mt-auto">
+                                            <input type="number" disabled class="form-control text-center">
+                                        </div-->
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th rowspan="2" class="align-middle text-center">
+                                        <label class="label-table">AUTRES PERSONNES</label>
+                                    </th>
+                                    <th class="align-middle text-center">
+                                        <label class="label-table">FEMMES</label>
+                                    </th>
+                                    <td>
+                                        <div class="md-form mt-auto">
+                                            <input type="number" ng-model='vadData.nouvFemme_m_10' string-to-number
+                                                   class="form-control text-center" ng-blur="saveValue('nouvFemme_m_10',vadData.nouvFemme_m_10)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="md-form mt-auto">
+                                            <input type="number" ng-model='vadData.nouvFemme_10_14' string-to-number
+                                                   class="form-control text-center" ng-blur="saveValue('nouvFemme_10_14',vadData.nouvFemme_10_14)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="md-form mt-auto">
+                                            <input type="number" ng-model='vadData.nouvFemme_15_19' string-to-number
+                                                   class="form-control text-center" ng-blur="saveValue('nouvFemme_15_19',vadData.nouvFemme_15_19)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="md-form mt-auto">
+                                            <input type="number" ng-model='vadData.nouvFemme_p_19' string-to-number
+                                                   class="form-control text-center" ng-blur="saveValue('nouvFemme_p_19',vadData.nouvFemme_p_19)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="md-form mt-auto">
+                                            <input type="number" ng-model='vadData.ancFemme_m_10' string-to-number
+                                                   class="form-control text-center" ng-blur="saveValue('ancFemme_m_10',vadData.ancFemme_m_10)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="md-form mt-auto">
+                                            <input type="number" ng-model='vadData.ancFemme_10_14' string-to-number
+                                                   class="form-control text-center" ng-blur="saveValue('ancFemme_10_14',vadData.ancFemme_10_14)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="md-form mt-auto">
+                                            <input type="number" ng-model='vadData.ancFemme_15_19' string-to-number
+                                                   class="form-control text-center" ng-blur="saveValue('ancFemme_15_19',vadData.ancFemme_15_19)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="md-form mt-auto">
+                                            <input type="number" ng-model='vadData.ancFemme_p_19' string-to-number
+                                                   class="form-control text-center" ng-blur="saveValue('ancFemme_p_19',vadData.ancFemme_p_19)">
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th class="align-middle text-center">
+                                        <label class="label-table"> HOMMES</label>
+                                    </th>
+                                    <td>
+                                        <div class="md-form mt-auto">
+                                            <input type="number" ng-model='vadData.nouvHomme_m_10' string-to-number
+                                                   class="form-control text-center" ng-blur="saveValue('nouvHomme_m_10',vadData.nouvHomme_m_10)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="md-form mt-auto">
+                                            <input type="number" ng-model='vadData.nouvHomme_10_14' string-to-number
+                                                   class="form-control text-center" ng-blur="saveValue('nouvHomme_10_14',vadData.nouvHomme_10_14)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="md-form mt-auto">
+                                            <input type="number" ng-model='vadData.nouvHomme_15_19' string-to-number
+                                                   class="form-control text-center" ng-blur="saveValue('nouvHomme_15_19',vadData.nouvHomme_15_19)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="md-form mt-auto">
+                                            <input type="number" ng-model='vadData.nouvHomme_p_19' string-to-number
+                                                   class="form-control text-center" ng-blur="saveValue('nouvHomme_p_19',vadData.nouvHomme_p_19)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="md-form mt-auto">
+                                            <input type="number" ng-model='vadData.ancHomme_m_10' string-to-number
+                                                   class="form-control text-center" ng-blur="saveValue('ancHomme_m_10',vadData.ancHomme_m_10)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="md-form mt-auto">
+                                            <input type="number" ng-model='vadData.ancHomme_10_14' string-to-number
+                                                   class="form-control text-center" ng-blur="saveValue('ancHomme_10_14',vadData.ancHomme_10_14)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="md-form mt-auto">
+                                            <input type="number" ng-model='vadData.ancHomme_15_19' string-to-number
+                                                   class="form-control text-center" ng-blur="saveValue('ancHomme_15_19',vadData.ancHomme_15_19)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="md-form mt-auto">
+                                            <input type="number" ng-model='vadData.ancHomme_p_19' string-to-number
+                                                   class="form-control text-center" ng-blur="saveValue('ancHomme_p_19',vadData.ancHomme_p_19)">
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                                <!--Table body-->
+
+                            </table>
+                            <!--Table-->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label for="nomMentor" class="font-weight-light labelMarg">NOM DE LA
+                                    MENTOR</label>
+                                <div class="md-form">
+                                    <input type="text" ng-model='vadData.nomMentor' id="nomMentor" class="form-control" ng-blur="saveValue('nomMentor',vadData.nomMentor)">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label for="nomSup" class="font-weight-ligvht labelMarg">NOM DU
+                                    SUPERVISEUR</label>
+                                <div class="md-form">
+                                    <input type="text" ng-model='vadData.nomSuperviseur' id="nomSup"
+                                           class="form-control" ng-blur="saveValue('nomSuperviseur',vadData.nomSuperviseur)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center py-4 mt-3">
+                        <button class="btn btn-cyan" type="submit" ng-click="saveVAD()">Enregistrer</button>
+                        <a ui-sref="ficheVADList({org: orgUnitSelect.id })" class="btn btn-blue-grey" role="button">Annuler</a>
+                    </div>
+                </form>
+                <!-- Material form register -->
+
+            </div>
+            <!-- Card body -->
+
+        </div>
+
+
+    </div>
+</main>
+<footer>
+
+</footer>
+<script>
+
+    $(function () {
+
+        $('.dates input').datepicker({
+            format: "dd-mm-yyyy",
+            weekStart: 1,
+            todayBtn: "linked",
+            clearBtn: true,
+            language: "fr",
+            daysOfWeekHighlighted: "0,6",
+            autoclose: true,
+            todayHighlight: true
+        });
+    });
+</script>
+</body>
+</html>

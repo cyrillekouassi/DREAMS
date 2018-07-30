@@ -1,0 +1,302 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+<style type="text/css">
+body {
+	background-image: url(../../Pictures/DREAMS.jpg);
+}
+</style>
+</head>
+
+<body>
+<table border="1" cellspacing="0" cellpadding="0" align="center" width="59%">
+  <tr>
+    <td height="34" valign="top" bgcolor="#CEF0CD" align="center"><strong>SECTION INFORMATION GEOGRAPHIQUE&nbsp;</strong></td>
+  </tr>
+  <tr>
+    <td width="100%" height="218" valign="top" bgcolor="#FFFFFF"><p>&nbsp;</p>
+      <p>District sanitaire 
+        <input ng-model="enrolA.district" type="text" name="textfield16" id="textfield16">
+       Nom de la plateforme&nbsp;:
+<input value="" ng-model="enrolA.plateform_cod" type="text" name="textfield17" id="textfield17">
+      </p>
+      <p>Centre social&nbsp;: 
+        <input ng-model="enrolA.centre_social" type="text" name="textfield18" id="textfield18">
+     Nom de l&rsquo;ONG 
+        <input ng-model="enrolA.ong" type="text" name="textfield19" id="textfield19">
+     </p>
+      <p>Code de l&rsquo;espace sur : 
+        <input ng-model="enrolA.codeSafespace" type="text" name="textfield20" id="textfield20">
+      Nom de l&rsquo;agent enquêteur&nbsp;:
+<input ng-model="enrolA.nom_enqueteur" type="text" name="textfield" id="textfield">
+      </p>
+      <p>Numéro de la fiche    d&rsquo;éligibilité de la bénéficiaire&nbsp;: 
+        <input ng-model="enrolA.num_fiche" type="number" name="textfield2" id="textfield2">
+      </p></td>
+  </tr>
+  <tr>
+    <td width="100%" height="34" valign="top" bgcolor="#CEF0CD"><p align="center"><strong>SECTION A : Informations socio-démographiques</strong></p></td>
+  </tr>
+  <tr>
+    <td width="100%" height="867" valign="top" bgcolor="#FFFFFF"><p><em>&nbsp;</em></p>
+      <p><em>Nom: 
+        <input ng-model="enrolA.nom" type="text" name="textfield3" id="textfield3">
+         Prénoms&nbsp;: 
+        <input ng-model="enrolA.pren" type="text" name="textfield4" id="textfield4">
+       </em></p>
+      <p><br>
+        <em class="dates">Date de naissance  (jj-mm-aaaa)
+        <input ng-model="enrolA.dat_nais" type="text" name="date" id="date">
+      </em> </p>
+      <p><br>
+        <em class="dates">Date d'enrôlement (jj-mm-aaaa)  
+        <input ng-model="enrolA.dat_enrol" type="text" name="date2" id="date2">
+      </em>     </p>
+      <p><em>Age à l&rsquo;enrôlement:
+        <input ng-model="enrolA.age_enrol" string-to-number type="number" name="number" id="number">
+      </em><br>
+      </p>
+      <p><em><strong><u>Porte d&rsquo;entrée</u></strong></em></p>
+      <div class="form-check">
+    <input value="ECOLE" ng-model="enrolA.porte_entre_bene" ng-change="changeporte('ecole')" name="radio1" type="radio" class="with-gap" id="radio101">
+    <label for="radio101">Ecole</label>
+</div>
+       <div class="form-check">
+        <input value="CentreSOCIAL" ng-model="enrolA.porte_entre_bene" ng-change="changeporte('centresocial')" name="radio1" type="radio" class="with-gap" id="radio102" >
+        <label for="radio102">Centre social</label>
+      </div>
+<div class="form-check">
+        <input value="ComplexeSocioEducatif" ng-model="enrolA.porte_entre_bene" ng-change="changeporte('complexe')" name="radio1" type="radio" class="with-gap" id="radio103" >
+        <label for="radio103">Complexe socio-éducatif</label>
+      </div>
+  <div class="form-check">
+        <input value="EspaceRencontreJEUNE" ng-model="enrolA.porte_entre_bene" ng-change="changeporte('espace')" name="radio1" type="radio" class="with-gap" id="radio104" >
+	  <label for="radio104">Espace de rencontres jeunes</label>
+      </div>
+<div class="form-check">
+        <input value="MARCHE" ng-model="enrolA.porte_entre_bene" ng-change="changeporte('marche')" name="radio1" type="radio" class="with-gap" id="radio105" >
+        <label for="radio105">Marché</label>
+</div>
+<div class="form-check">
+        <input value="MaquisBarHotelBoitNuit" ng-model="enrolA.porte_entre_bene" ng-change="changeporte('maquis')" name="radio1" type="radio" class="with-gap" id="radio106" >
+        <label for="radio106">Maquis/ Bar/ Hôtel/ Boite de nuit</label>
+      </div>
+
+<div class="form-check">
+        <input value="AUTRES" ng-model="enrolA.porte_entre_bene" ng-change="changeporte('maquis')" name="radio1" type="radio" class="with-gap" id="radio107" >
+        <label for="radio107">Autres (préciser)</label>
+        <input ng-model="enrolA.autre_porte_entre_bene" type="text" name="textfield12" id="textfield12" ng-if="enrolA.porte_entre_bene == 'AUTRES'">
+        </div>
+        
+      <p>
+        <em><strong><u>Statut matrimonial (bénéficiaire):      </u></strong></em>        </p>
+      <div class="form-check">
+        <input value="CELIBA" ng-model="enrolA.statut_mat_bene" ng-change="changestatut('celib')" name="radio2" type="radio" class="with-gap" id="radio108" >
+        <label for="radio108">Célibataire</label>
+      </div>
+        <em>
+       
+        <div class="form-check">
+        <input value="MARIE" ng-model="enrolA.statut_mat_bene" ng-change="changestatut('marie')" name="radio2" type="radio" class="with-gap" id="radio109" >
+        <label for="radio109">Mariée/Concubinage</label>
+        </div>
+        </em>
+        <div class="form-check">
+        <input value="DIVORCE" ng-model="enrolA.statut_mat_bene" ng-change="changestatut('separe')" name="radio2" type="radio" class="with-gap" id="radio110" >
+        <label for="radio110">Séparée/Divorcé</label>
+      </div>
+        
+        
+      <div class="form-check">
+        <input value="VEUVE" ng-model="enrolA.statut_mat_bene" ng-change="changestatut('veuve')" name="radio2" type="radio" class="with-gap" id="radio111" >
+        <label for="radio111">Veuve</label>
+      </div>
+      
+      <p>
+        <p><em><strong><u>Occupation</u></strong></em></p>
+        <div class="form-check">
+            <input value="ELEVE" ng-model="enrolA.ocup" ng-change="changeOcup('ELEVE')" name="occupation" type="radio" class="with-gap" id="radio110ELEVE" >
+            <label for="radio110ELEVE">Elève</label>
+        </div>
+        <div class="form-check">
+            <input value="ETUDIANT" ng-model="enrolA.ocup" ng-change="changeOcup('ETUDIANT')" name="occupation" type="radio" class="with-gap" id="radio110ETUDIANT" >
+            <label for="radio110ETUDIANT">Etudiant</label>
+        </div>
+        <div class="form-check">
+            <input value="APPREND" ng-model="enrolA.ocup" ng-change="changeOcup('APPREND')" name="occupation" type="radio" class="with-gap" id="radio110APPREND" >
+            <label for="radio110APPREND">En apprentissage</label>
+        </div>
+        <div class="form-check">
+            <input value="PerMAIS" ng-model="enrolA.ocup" ng-change="changeOcup('PerMAIS')" name="occupation" type="radio" class="with-gap" id="radio110PerMAIS" >
+            <label for="radio110PerMAIS">Personnel de maison</label>
+        </div>
+        <div class="form-check">
+            <input value="COMMERCE" ng-model="enrolA.ocup" ng-change="changeOcup('COMMERCE')" name="occupation" type="radio" class="with-gap" id="radio110COMMERCE" >
+            <label for="radio110COMMERCE">Commerçant</label>
+        </div>
+        <div class="form-check">
+            <input value="AUT" ng-model="enrolA.ocup" ng-change="changeOcup('AUT')" name="occupation" type="radio" class="with-gap" id="radio110AUT" >
+            <label for="radio110AUT">Autre</label>
+        </div>
+
+        <input ng-model="enrolA.oc_aut" type="text" name="textfield11" id="textfield11" ng-if="enrolA.ocup == 'AUT'">
+      </p>
+      <p>
+        <em>Numéro de téléphone (bénéficiaire):
+        <input ng-model="enrolA.tel" type="tel" name="tel" id="tel">
+      </em></p>
+      <p>
+        <em>Région de résidence    
+        <input ng-model="enrolA.region" type="text" name="textfield10" id="textfield10">
+        </em> <em>Département 
+        <input ng-model="enrolA.departement" type="text" name="textfield9" id="textfield9">
+      </em></p>
+      <p>
+        <em>Sous-Préfecture    
+        <input ng-model="enrolA.sousPrefect" type="text" name="textfield8" id="textfield8">
+        </em> <em>  Village / commune
+        <input ng-model="enrolA.villageCommune" type="text" name="textfield7" id="textfield7">
+      </em></p>
+      <p>
+        <em>Repère:    
+        <input ng-model="enrolA.repere" type="text" name="textfield6" id="textfield6">
+      </em></p>
+        <p>
+            <em>Numero d'orde de la beneficiaire:
+                <input ng-model="enrolA.no_benef" type="text" maxlength="3" name="textfield6" ng-blur="getBenefId()">
+            </em></p>
+      <p>
+        <em>Code identification DREAMS: 
+        <input ng-model="enrolA.id_dreams" type="text" name="textfield5" id="textfield5" disabled>
+      </em></p></td>
+  </tr>
+  <tr>
+    <td width="100%" height="161" valign="top" bgcolor="#FFFFFF"><p>&nbsp;</p>
+      <p><em>Nom et prénoms de la personne en charge du bénéficiaire 
+        <input ng-model="enrolA.nom_charge_bene" type="text" name="textfield13" id="textfield13">
+      </em></p>
+      <p><em>Relation 
+          <div class="form-check">
+              <input value="PARENT" ng-model="enrolA.relation" name="relation" type="radio" class="with-gap" id="PARENT" >
+              <label for="PARENT">Parent</label>
+          </div>
+          <div class="form-check">
+              <input value="TUTEUR" ng-model="enrolA.relation" name="relation" type="radio" class="with-gap" id="TUTEUR" >
+              <label for="TUTEUR">tuteur</label>
+          </div>
+      </em></p>
+      <p><em>Numéro de téléphone (Personne en charge du bénéficiaire):
+        <input ng-model="enrolA.tel_charg_benef" type="tel" name="tel2" id="tel2">
+      </em></p></td>
+  </tr>
+	</table>
+<table border="1" cellspacing="0" cellpadding="0" align="center" width="1053">
+  <tr>
+    <td colspan="4" valign="top" bgcolor="#FFFFFF"><p>&nbsp;</p></td>
+  </tr>
+  <tr>
+    <td width="45" valign="top" bgcolor="#FFFFFF"><p align="center"><strong>N°</strong></p></td>
+    <td width="327" valign="top" bgcolor="#FFFFFF"><p align="center"><strong>Question</strong></p></td>
+    <td width="216" valign="top" bgcolor="#FFFFFF"><p align="center"><strong>Réponse #1</strong></p></td>
+    <td width="455" valign="top" bgcolor="#FFFFFF"><p align="center"><strong>Réponse #2</strong></p></td>
+  </tr>
+  <tr>
+    <td width="45" valign="top" bgcolor="#FFFFFF"><p>&nbsp;</p>
+      <p>  <br>
+        A01</p></td>
+    <td width="327" valign="top" bgcolor="#FFFFFF"><p>Avez-vous un document attestant votre âge&nbsp;?<br>
+      Si oui, lequel&nbsp;? (vérifiez le document mentionné)<br>
+      <em>Numéro du document de    vérification&nbsp;</em><em>
+      <input ng-model="enrolA._01_b_num_doc" string-to-number type="text" name="number2" id="number2" ng-if="enrolA._01_doc_att_age == 'OUI'">
+      </em></p></td>
+    <td width="216" bgcolor="#FFFFFF">
+      <div class="form-check">
+        <input value="OUI" ng-model="enrolA._01_doc_att_age" ng-change="changedocument('oui')" name="radio3" type="radio" class="with-gap" id="radio112" >
+        <label for="radio112">Oui</label>
+      </div>  
+      <div class="form-check">
+        <input value="NON" ng-model="enrolA._01_doc_att_age" ng-change="changedocuement('non')" name="radio3" type="radio" class="with-gap" id="radio113" >
+        <label for="radio113">Non</label>
+      </div>  </td>
+      
+    <td width="455" valign="top" bgcolor="#FFFFFF">   
+      <div class="form-check">
+        <input value="EXTRAIT" ng-model="enrolA._01_a_type_doc" ng-change="changedocuement('extrait')" name="radio4" type="radio" class="with-gap" id="radio114" >
+        <label for="radio114">Extrait de naissance</label>
+      </div>
+      <div class="form-check">
+        <input value="CNI" ng-model="enrolA._01_a_type_doc" ng-change="changedocuement('cni')" name="radio4" type="radio" class="with-gap" id="radio115" >
+        <label for="radio115">Carte Nationale d&rsquo;Identité (CNI)</label>
+      </div>
+      <div class="form-check">
+        <input value="ATT" ng-model="enrolA._01_a_type_doc" ng-change="changedocuement('attestation')" name="radio4" type="radio" class="with-gap" id="radio116" >
+        <label for="radio116">Attestation    d&rsquo;Identité</label>
+      </div>
+      <div class="form-check">
+        <input value="CIS" ng-model="enrolA._01_a_type_doc" ng-change="changedocuement('cis')" name="radio4" type="radio" class="with-gap" id="radio117" >
+        <label for="radio117">Carte d&rsquo;Identité Scolaire</label>
+      </div>
+      <div class="form-check">
+        <input value="AUT" ng-model="enrolA._01_a_type_doc" ng-change="changedocuement('autre')" name="radio4" type="radio" class="with-gap" id="radio118" >
+        <label for="radio118">Autre (précisez)</label>
+        <input ng-model="enrolA._01_c_precis" type="text" name="textfield15" id="textfield15" ng-if="enrolA._01_a_type_doc == 'AUT'">
+      </div>
+   </td>
+  </tr>
+  <tr>
+    <td width="45" height="69" valign="top" bgcolor="#FFFFFF"><p>A02</p></td>
+    <td width="327" valign="top" bgcolor="#FFFFFF"><p>Pour les filles de 10 à 16 ans révolus,    est-ce que le parent / tuteur a donné son consentement pour que la fille soit    enrôlée dans le projet DREAMS?</p></td>
+    <td width="216" bgcolor="#FFFFFF">
+      <div class="form-check">
+        <input value="OUI" ng-model="enrolA._02_accord_parent" ng-change="changeconsentement('oui')" name="radio5" type="radio" class="with-gap" id="radio119" >
+	    <label for="radio119">Oui</label>
+      </div>
+      <div class="form-check">
+        <input value="NON" ng-model="enrolA._02_accord_parent" ng-change="changeconsentement('non')" name="radio5" type="radio" class="with-gap" id="radio120" >
+	    <label for="radio120">Non</label>
+      </div>
+      <div class="form-check">
+        <input value="NA" ng-model="enrolA._02_accord_parent" ng-change="changeconsentement('NA')" name="radio5" type="radio" class="with-gap" id="radio121" >
+		  <label for="radio121">Non applicable</label>
+      </div>
+                      </td>
+    <td width="455" valign="top" bgcolor="#FFFFFF"><p><strong>Note</strong>: Assurez-vous d'avoir un consentement/autorisation parental écrit dans le dossier des jeunes filles&nbsp;? </p>
+    </td>
+  </tr>
+  <tr>
+    <td width="45" height="50" valign="top" bgcolor="#FFFFFF"><p>A03</p>
+       
+    </td>
+    <td width="327" valign="top" bgcolor="#FFFFFF"><p>A-t-elle accepté d'être enrôlée dans le projet à DREAMS?</p></td>
+    <td width="216" bgcolor="#FFFFFF"><p>
+     <div class="form-check">
+        <input value="OUI" ng-model="enrolA._03_acord_bene" ng-change="changeenrole('oui')" name="radio6" type="radio" class="with-gap" id="radio122" >
+		  <label for="radio122">Oui</label>
+      </div>
+     <div class="form-check">
+        <input value="NON" ng-model="enrolA._03_acord_bene" ng-change="changeenrole('non')" name="radio6" type="radio" class="with-gap" id="radio123" >
+		  <label for="radio123">Non</label>
+      </div>              </p></td>
+    <td width="455" valign="top" bgcolor="#FFFFFF"><p>Commentaire</p>
+
+    </td>
+  </tr>
+  <tr>
+    <td height="52" colspan="4" valign="top" bgcolor="#FFFFFF"><ul>
+      <li>Si oui aux questions A02 et A03, la fille DEVRAIT être enrôlée    dans le projet DREAMS. </li>
+      <li>Si non aux questions A02 et A03, la fille NE DEVRAIT    PAS être enrôlée dans le projet DREAMS. Cependant, elles peuvent être    référées vers d&rsquo;autres programmes. </li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td height="29" colspan="4" valign="top" bgcolor="#FFFFFF"><p>&nbsp;</p>
+    <div class="text-center py-4 mt-3">
+        <button class="btn btn-cyan" ng-click="savePage()">Suivant</button>
+    </div>
+    
+    </td>
+  </tr>
+</table>
+</body>
+</html>

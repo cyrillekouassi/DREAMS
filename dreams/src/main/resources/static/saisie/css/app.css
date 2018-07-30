@@ -1,0 +1,24 @@
+.labelMarg{
+    margin-bottom: 0px;
+}
+.inputMarg{
+    margin-top: 0px;
+}
+.orgPanel{
+    height: 350px;
+    margin: 0px;
+    width: 220px;
+    background-color: white;
+    overflow:auto;
+    white-space: nowrap;
+    font-size: 0.9em;
+}
+.w-auto {
+    width: auto;
+}
+.tableResp{
+    overflow-x:auto;
+}
+.bgSearch{
+    background-color: #00d3ee;
+}

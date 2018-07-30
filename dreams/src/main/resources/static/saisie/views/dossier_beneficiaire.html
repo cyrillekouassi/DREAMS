@@ -1,0 +1,2171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>DOSSIER DU BENEFICIAIRE DREAMS</title>
+</head>
+<body>
+<main>
+    <div class="container">
+        <div class="card">
+            <div class="view gradient-card-header purple-gradient">
+                <div class="modal-header info-color white-text">
+                    <h4 class="title text-center">DOSSIER DU BENEFICIAIRE DREAMS</h4>
+                </div>
+            </div>
+
+            <!-- Card body -->
+            <div class="card-body">
+
+
+                <form>
+                    <div style="margin: auto">
+
+                    </div>
+                    <div class="form-group border border-primary p-5">
+                        <div class="row">
+                            <div class="col">
+                                <div class="mt-3">
+                                    <input type="text" id="nomONG" ng-model='dossier.nomONG' readonly
+                                           class="form-control mb-0">
+                                    <label for="nomONG" class="font-weight-light mt-0">NOM DE L’ONG</label>
+                                </div>
+
+                                <div class="mt-3">
+                                    <input type="text" id="region" ng-model='dossier.region' readonly
+                                           class="form-control mb-0">
+                                    <label for="region" class="font-weight-light mt-0">Région </label>
+                                </div>
+                                <div class="mt-3">
+                                    <input type="text" id="sousPrefect" ng-model='dossier.sousPrefect' readonly
+                                           class="form-control mb-0">
+                                    <label for="sousPrefect" class="font-weight-light mt-0">Sous-Préfecture </label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mt-3">
+                                    <input type="text" ng-model='dossier.centre_social' id="centre_social" readonly
+                                           class="form-control mb-0">
+                                    <label for="centre_social" class="font-weight-light mt-0">Centre Social</label>
+                                </div>
+                                <div class="mt-3">
+                                    <input type="text" id="departement" ng-model='dossier.departement' readonly
+                                           class="form-control mb-0">
+                                    <label for="departement" class="font-weight-light mt-0">DEPARTEMENT </label>
+                                </div>
+
+                                <div class="mt-3">
+                                    <input type="text" id="villageCommune" ng-model='dossier.villageCommune' readonly
+                                           class="form-control mb-0">
+                                    <label for="villageCommune" class="font-weight-light mt-0">VILLAGE/Commune </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="mt-3">
+                                <input type="text" id="quatierBenef" ng-model='dossier.quatierBenef'
+                                       class="form-control mb-0">
+                                <label for="quatierBenef" class="font-weight-light mt-0">QUARTIER Beneficiaire </label>
+                            </div>
+                            <div class="mt-3">
+                                <input type="text" id="repereHabitation" ng-model='dossier.repereHabitation'
+                                       class="form-control mb-0">
+                                <label for="repereHabitation" class="font-weight-light mt-0">REPERE DU LIEU
+                                    D’HABITATION </label>
+                            </div>
+                            <div class="mt-3">
+                                <input type="text" id="nomPrenomBenef" ng-model='dossier.nomPrenomBenef' readonly
+                                       class="form-control mb-0">
+                                <label for="nomPrenomBenef" class="font-weight-light mt-0">Nom et prénoms
+                                    Bénéficiaire </label>
+                            </div>
+                            <div class="mt-3">
+                                <input type="text" id="age" ng-model='dossier.age'
+                                       class="form-control mb-0">
+                                <label for="age" class="font-weight-light mt-0">AGE </label>
+                            </div>
+                            <div class="mt-3">
+                                <input type="text" id="contactTeleph" ng-model='dossier.contactTeleph'
+                                       class="form-control mb-0">
+                                <label for="contactTeleph" class="font-weight-light mt-0">CONTACT TELEPHONIQUE </label>
+                            </div>
+                            <div class="mt-3">
+                                <input type="text" id="nomPrenomParent" ng-model='dossier.nomPrenomParent'
+                                       class="form-control mb-0">
+                                <label for="nomPrenomParent" class="font-weight-light mt-0">NOM ET PRENOMS DU
+                                    PARENT/TUTEUR </label>
+                            </div>
+                            <div class="mt-3">
+                                <input type="text" id="contactParent" ng-model='dossier.contactParent'
+                                       class="form-control mb-0">
+                                <label for="contactParent" class="font-weight-light mt-0">CONTACT TELEPHONIQUE DU
+                                    PARENT/TUTEUR </label>
+                            </div>
+                            <div class="mt-3 dates">
+                                <input type="text" id="dateEnrolement" ng-model='dossier.dateEnrolement' readonly
+                                       class="form-control mb-0">
+                                <label for="dateEnrolement" class="font-weight-light mt-0">DATE D’ENROLEMENT</label>
+                            </div>
+                            <div class="mt-3">
+                                <input type="text" id="id_dreams" ng-model='dossier.id_dreams' ng-keyup="searchId(dossier.id_dreams)"
+                                       class="form-control mb-0">
+                                <div class="list-group position-absolute mt-0" id="list-tab" role="tablist">
+                                    <a ng-repeat="value in valueComplete track by $index" ng-click="codeSelected(value)" class="list-group-item list-group-item-action text-left bgSearch" data-toggle="list" role="tab">{{value}}</a>
+                                </div>
+                                <label for="id_dreams" class="font-weight-light mt-0">CODE D’IDENTIFICATION
+                                    DREAMS </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col border border-dark p-3">
+                                <label>I- PORTE D’ENTREE DREAMS </label>
+                                <div class="form-check mt-3">
+                                    <input class="form-check-input filled-in" type="checkbox"
+                                           ng-model="porteEntree.ecole" ng-change="changePorteEntree()"
+                                           id="ecole">
+                                    <label class="form-check-label" for="ecole">Ecole</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filled-in" type="checkbox"
+                                           ng-model="porteEntree.centreSocial" ng-change="changePorteEntree()"
+                                           id="centreSocial">
+                                    <label class="form-check-label" for="centreSocial">Centre social</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filled-in" type="checkbox"
+                                           ng-model="porteEntree.complexeSocioEducatif" ng-change="changePorteEntree()"
+                                           id="complexeSocioEducatif">
+                                    <label class="form-check-label" for="complexeSocioEducatif">Complexe
+                                        socio-éducatif</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filled-in" type="checkbox"
+                                           ng-model="porteEntree.espaceJeune" ng-change="changePorteEntree()"
+                                           id="espaceJeune">
+                                    <label class="form-check-label" for="espaceJeune">Espace de rencontres
+                                        jeunes</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filled-in" type="checkbox"
+                                           ng-model="porteEntree.marche" ng-change="changePorteEntree()"
+                                           id="marche">
+                                    <label class="form-check-label" for="ecole">Marché</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filled-in" type="checkbox"
+                                           ng-model="porteEntree.maquisBars" ng-change="changePorteEntree()"
+                                           id="maquisBars">
+                                    <label class="form-check-label" for="maquisBars">Maquis/ Bar/ Hôtel/ Boite de
+                                        nuit</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filled-in" type="checkbox"
+                                           ng-model="porteEntree.autre" ng-change="changePorteEntree()"
+                                           id="autre">
+                                    <label class="form-check-label" for="autre">Autre</label>
+                                </div>
+                                <div class="md-form" ng-if="porteEntree.autre">
+                                    <input type="text" id="autrePorteEntree" ng-model='dossier.autrePorteEntree'
+                                           class="form-control">
+                                    <label for="autrePorteEntree" class="font-weight-light">AUTRE PORTE D’ENTREE
+                                        DREAMS </label>
+                                </div>
+
+                            </div>
+                            <div class="col border border-dark p-3">
+                                <label>II- CATEGORIE DREAMS A L’ENTRÉE DANS LE PROGRAMME</label>
+                                <div class="form-check mt-3">
+                                    <input class="form-check-input filled-in" type="checkbox"
+                                           ng-model="categorieDreams.scolarisee" ng-change="changeCategorieDreams()"
+                                           id="scolarisee">
+                                    <label class="form-check-label" for="scolarisee">Scolarisée</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filled-in" type="checkbox"
+                                           ng-model="categorieDreams.descolarisee" ng-change="changeCategorieDreams()"
+                                           id="descolarisee">
+                                    <label class="form-check-label" for="descolarisee">Déscolarisée</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filled-in" type="checkbox"
+                                           ng-model="categorieDreams.mariee_10_14" ng-change="changeCategorieDreams()"
+                                           id="mariee_10_14">
+                                    <label class="form-check-label" for="mariee_10_14">Mariée (10-14 ans)</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filled-in" type="checkbox"
+                                           ng-model="categorieDreams.mariee_15_19" ng-change="changeCategorieDreams()"
+                                           id="mariee_15_19">
+                                    <label class="form-check-label" for="mariee_15_19">Mariée (15-19 ans)</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filled-in" type="checkbox"
+                                           ng-model="categorieDreams.enceinte_10_14" ng-change="changeCategorieDreams()"
+                                           id="enceinte_10_14">
+                                    <label class="form-check-label" for="enceinte_10_14">Enceinte (10-14 ans)</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filled-in" type="checkbox"
+                                           ng-model="categorieDreams.enceinte_15_19" ng-change="changeCategorieDreams()"
+                                           id="enceinte_15_19">
+                                    <label class="form-check-label" for="enceinte_15_19">Enceinte (15-19 ans)</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filled-in" type="checkbox"
+                                           ng-model="categorieDreams.fille_mere_10_14"
+                                           ng-change="changeCategorieDreams()"
+                                           id="fille_mere_10_14">
+                                    <label class="form-check-label" for="fille_mere_10_14">Fille - mère
+                                        (10-14ans)</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filled-in" type="checkbox"
+                                           ng-model="categorieDreams.fille_mere_15_19"
+                                           ng-change="changeCategorieDreams()"
+                                           id="fille_mere_15_19">
+                                    <label class="form-check-label" for="fille_mere_15_19">Fille - mère (15-19
+                                        ans)</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filled-in" type="checkbox"
+                                           ng-model="categorieDreams.autre" ng-change="changeCategorieDreams()"
+                                           id="autreCat">
+                                    <label class="form-check-label" for="autreCat">Autre</label>
+                                </div>
+                                <div class="md-form" ng-if="porteEntree.autre">
+                                    <input type="text" id="autreCategorieDreams" ng-model='dossier.autreCategorieDreams'
+                                           class="form-control">
+                                    <label for="autreCategorieDreams" class="font-weight-light">AUTRE CATEGORIE
+                                        DREAMS</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-5">
+                        <label><strong>III- TABLEAU DES BESOINS IDENTIFIES</strong></label>
+                        <table class="table table-bordered table-condensed">
+                            <thead>
+                            <tr>
+                                <th>Numéro
+                                    d' ordre
+                                </th>
+                                <th>
+                                    INTERVENTIONS PRIMAIRES
+                                </th>
+                                <th>
+                                    BESOINS IDENTIFIES
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th>1</th>
+                                <td>Education sexuelle complète à l'école ou dans la communauté</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="educationSexuel.conceptSexualite"
+                                               ng-change="changeEducationSexuel()"
+                                               id="conceptSexualite">
+                                        <label class="form-check-label" for="conceptSexualite">Concepts de la
+                                            sexualité</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="educationSexuel.conceptsGenre"
+                                               ng-change="changeEducationSexuel()"
+                                               id="conceptsGenre">
+                                        <label class="form-check-label" for="conceptsGenre">Concepts genre différence
+                                            entre filles et garçons</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="educationSexuel.connaissanceCorpsOrgane"
+                                               ng-change="changeEducationSexuel()"
+                                               id="connaissanceCorpsOrgane">
+                                        <label class="form-check-label" for="connaissanceCorpsOrgane">Connaissance du
+                                            corps humain et des organes sexuels</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="educationSexuel.aspectsNegatifs"
+                                               ng-change="changeEducationSexuel()"
+                                               id="aspectsNegatifs">
+                                        <label class="form-check-label" for="aspectsNegatifs">Aspects négatifs de la
+                                            sexualité</label>
+                                    </div>
+                                    <div class="form-check pb-2">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="educationSexuel.promotionDepistage"
+                                               ng-change="changeEducationSexuel()"
+                                               id="promotionDepistage">
+                                        <label class="form-check-label" for="promotionDepistage"><span>Promotion du dépistage volontaire du VIH/SIDA ( 15 – 19 ans)</span></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>2</th>
+                                <td>Actifs sociaux</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="actifsSociaux.participationActivites"
+                                               ng-change="changeEducationSexuel()"
+                                               id="participationActivites">
+                                        <label class="form-check-label" for="participationActivites">Participation aux
+                                            activités (culturelles, ludiques et sportives)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="actifsSociaux.conceptsGenre"
+                                               ng-change="changeEducationSexuel()"
+                                               id="participationCauseries">
+                                        <label class="form-check-label" for="participationCauseries">Participation aux
+                                            causeries</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>3</th>
+                                <td>Soutien psychosocial</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="soutienPsychoSocial.ecouteConseils"
+                                               ng-change="changeSoutienPsychoSocial()"
+                                               id="ecouteConseils">
+                                        <label class="form-check-label" for="ecouteConseils">Ecoute / Conseils
+                                            individuels</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="soutienPsychoSocial.suivi"
+                                               ng-change="changeSoutienPsychoSocial()"
+                                               id="suivi">
+                                        <label class="form-check-label" for="suivi">Suivi</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="soutienPsychoSocial.referenceVersExperts"
+                                               ng-change="changeSoutienPsychoSocial()"
+                                               id="referenceVersExperts">
+                                        <label class="form-check-label" for="referenceVersExperts">Référence vers
+                                            experts ou structures spécialisées</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>4</th>
+                                <td>Renforcement socio-économique</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="renforcementSocioEconomique.businessPlus"
+                                               ng-change="changeRenforcementSocioEconomique()"
+                                               id="businessPlus">
+                                        <label class="form-check-label" for="businessPlus">Business plus (10
+                                            sessions)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="renforcementSocioEconomique.participationAVEC"
+                                               ng-change="changeRenforcementSocioEconomique()"
+                                               id="participationAVEC">
+                                        <label class="form-check-label" for="participationAVEC">Participation AVEC (date
+                                            de la 1ère cotisation)</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="text-center"><label><strong>SERVICES SECONDAIRES</strong></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>5</th>
+                                <td>Soutien éducatif / Alphabétisation</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="soutienEducatif.appuiScolaire"
+                                               ng-change="changeSoutienEducatif()"
+                                               id="appuiScolaire">
+                                        <label class="form-check-label" for="appuiScolaire">Appui aux frais
+                                            d’inscriptions, de scolarité et d’examens</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="soutienEducatif.fournitures"
+                                               ng-change="changeSoutienEducatif()"
+                                               id="fournitures">
+                                        <label class="form-check-label" for="fournitures">Fournitures</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="soutienEducatif.uniformes" ng-change="changeSoutienEducatif()"
+                                               id="uniformes">
+                                        <label class="form-check-label" for="uniformes">Uniformes scolaires</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="soutienEducatif.autre" ng-change="changeSoutienEducatif()"
+                                               id="autresoutienEducatif">
+                                        <label class="form-check-label" for="autresoutienEducatif">Autre</label>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>6</th>
+                                <td>Accès aux préservatifs</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="accesPreservatifs.utilisationPreservatifs"
+                                               ng-change="changeAccesPreservatifs()"
+                                               id="utilisationPreservatifs">
+                                        <label class="form-check-label" for="utilisationPreservatifs">Promotion de
+                                            l’utilisation de préservatifs</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="accesPreservatifs.distributionPreservatifs"
+                                               ng-change="changeAccesPreservatifs()"
+                                               id="distributionPreservatifs">
+                                        <label class="form-check-label" for="distributionPreservatifs">Distribution de
+                                            préservatifs</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="accesPreservatifs.referencePreservatifs"
+                                               ng-change="changeAccesPreservatifs()"
+                                               id="referencePreservatifs">
+                                        <label class="form-check-label" for="referencePreservatifs">Référence pour mise
+                                            à disposition de préservatifs</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>7</th>
+                                <td>Contraception mixte</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="contraceptionMixte.referencVersPF"
+                                               ng-change="changeContraceptionMixte()"
+                                               id="referencVersPF">
+                                        <label class="form-check-label" for="referencVersPF">Référence vers services de
+                                            planning familial (SSSU)</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>8</th>
+                                <td>Référence active aux services</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="conseilsDepistage.referenceServices"
+                                               ng-change="changeConseilsDepistage()"
+                                               id="referenceServices">
+                                        <label class="form-check-label" for="referenceServices">Référence vers services
+                                            de planning familial (SSSU)</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>9</th>
+                                <td>Soins post-VBG</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="soinsPostVBG.referenceMedical" ng-change="changeSoinsPostVBG()"
+                                               id="referenceMedical">
+                                        <label class="form-check-label" for="referenceMedical">Référence
+                                            Médicale</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="soinsPostVBG.referencePsychoSocial"
+                                               ng-change="changeSoinsPostVBG()"
+                                               id="referencePsychoSocial">
+                                        <label class="form-check-label" for="referencePsychoSocial">Référence
+                                            Psychosociale</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="soinsPostVBG.referenceJuridique"
+                                               ng-change="changeSoinsPostVBG()"
+                                               id="referenceJuridique">
+                                        <label class="form-check-label" for="referenceJuridique">Référence
+                                            Juridique</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="soinsPostVBG.referenceAbri" ng-change="changeSoinsPostVBG()"
+                                               id="referenceAbri">
+                                        <label class="form-check-label" for="referenceAbri">Référence Abri</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="soinsPostVBG.appuiMedicaux" ng-change="changeSoinsPostVBG()"
+                                               id="appuiMedicaux">
+                                        <label class="form-check-label" for="appuiMedicaux">Appui aux frais
+                                            médicaux</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="soinsPostVBG.appuiJuridiques" ng-change="changeSoinsPostVBG()"
+                                               id="appuiJuridiques">
+                                        <label class="form-check-label" for="appuiJuridiques">Appui aux frais
+                                            juridiques</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>10</th>
+                                <td>Sécurité alimentaire/nutrition</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="securiteAlimentaire.referenceNutritionnel"
+                                               ng-change="changeSecuriteAlimentaire()"
+                                               id="referenceNutritionnel">
+                                        <label class="form-check-label" for="referenceNutritionnel">Référence pour
+                                            soutien nutritionnel (Evaluation, conseil ou appui)</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>11</th>
+                                <td>Sécurité alimentaire/nutrition</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="protection.appuiDocument" ng-change="changeProtection()"
+                                               id="appuiDocument">
+                                        <label class="form-check-label" for="appuiDocument">Appui à l’établissement de
+                                            documents juridiques</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>12</th>
+                                <td>Promotion de la communication parents-enfants</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="communicationParentsEnfants.sinovoyu"
+                                               ng-change="changeCommunicationParentsEnfants()"
+                                               id="sinovoyu">
+                                        <label class="form-check-label" for="sinovoyu">SINOVOYU (14 sessions)</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>13</th>
+                                <td>Renforcement économique des ménages</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="renforcementEconomique.AVEC"
+                                               ng-change="changeRenforcementEconomique()"
+                                               id="AVEC">
+                                        <label class="form-check-label" for="AVEC">AVEC (Association Villageoise
+                                            dEpargne et de Credit)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input filled-in" type="checkbox"
+                                               ng-model="renforcementEconomique.educationFinanciere"
+                                               ng-change="changeRenforcementEconomique()"
+                                               id="educationFinanciere">
+                                        <label class="form-check-label" for="educationFinanciere">Education
+                                            financière)</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="border-default mt-5">
+                            <div class="row">
+                                <div class="col-1">
+                                    <img src="../_img/entete/logo_DREAMS.png" alt="DREAMS CÔTE D'IVOIRE">
+                                </div>
+                                <div class="col">
+                                    <h2 class="text-center"><strong>FICHE INDIVIDUELLE DE SUIVI DES SERVICES
+                                        OFFERTS</strong></h2>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="mt-5">
+                            <h4><strong>INTERVENTIONS PRIMAIRES</strong></h4>
+                            <div>
+                                <!--Table-->
+                                <table class="table table-responsive table-bordered table-responsive-md">
+
+                                    <!--Table head-->
+                                    <thead class="amber lighten-3">
+                                    <tr>
+                                        <th class="text-center">1</th>
+                                        <th class="text-center">Intervention</th>
+                                        <th class="text-center">Services</th>
+                                        <th class="text-center">Date d’exécution (JJ-MM-AAAA)</th>
+                                        <th class="text-center">Date d’exécution (JJ-MM-AAAA)</th>
+                                        <th class="text-center">Date d’exécution (JJ-MM-AAAA)</th>
+                                        <th class="text-center">Date d’exécution (JJ-MM-AAAA)</th>
+                                        <th class="text-center">Date d’exécution (JJ-MM-AAAA)</th>
+                                        <th class="text-center">Date d’exécution (JJ-MM-AAAA)</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th rowspan="5" class="align-middle text-center">
+                                        </th>
+                                        <th rowspan="5" class="align-middle text-center">
+                                            <label class="label-table">Education Sexuelle Complète</label>
+                                        </th>
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Concepts de la sexualité</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='conceptSexualite.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='conceptSexualite.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='conceptSexualite.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='conceptSexualite.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='conceptSexualite.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='conceptSexualite.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Concepts genre différence entre filles et
+                                                garçons</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='conceptsGenre.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='conceptsGenre.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='conceptsGenre.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='conceptsGenre.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='conceptsGenre.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='conceptsGenre.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Connaissance du corps humain et des organes
+                                                sexuels</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='connaissanceCorpsOrgane.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='connaissanceCorpsOrgane.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='connaissanceCorpsOrgane.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='connaissanceCorpsOrgane.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='connaissanceCorpsOrgane.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='connaissanceCorpsOrgane.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Aspects négatifs de la sexualité</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='aspectsNegatifs.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='aspectsNegatifs.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='aspectsNegatifs.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='aspectsNegatifs.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='aspectsNegatifs.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='aspectsNegatifs.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Promotion du dépistage volontaire du VIH/SIDA (
+                                                15 – 19 ans)</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='promotionDepistage.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='promotionDepistage.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th rowspan="2" class="align-middle text-center">
+                                        </th>
+                                        <th rowspan="2" class="align-middle text-center">
+                                            <label class="label-table"><strong>Actifs sociaux</strong></label>
+                                        </th>
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Participation aux activités
+                                                (culturelles, ludiques et sportives)
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='participationActivites.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='participationActivites.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='participationActivites.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='participationActivites.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='participationActivites.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='participationActivites.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Participation aux causeries</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='participationCauseries.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='participationCauseries.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='participationCauseries.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='participationCauseries.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='participationCauseries.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='participationCauseries.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th rowspan="3" class="align-middle text-center">
+                                        </th>
+                                        <th rowspan="3" class="align-middle text-center">
+                                            <label class="label-table"><strong>Psychosocial</strong></label>
+                                        </th>
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Ecoute/Conseils individuels</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='ecouteConseils.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='ecouteConseils.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='ecouteConseils.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='ecouteConseils.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='ecouteConseils.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='ecouteConseils.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Suivi</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='suivi.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='suivi.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='suivi.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='suivi.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='suivi.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='suivi.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Référence vers experts ou structures
+                                                spécialisées</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceVersExperts.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceVersExperts.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceVersExperts.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceVersExperts.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceVersExperts.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceVersExperts.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th rowspan="3" class="align-middle text-center">
+                                        </th>
+                                        <th rowspan="3" class="align-middle text-center">
+                                            <label class="label-table"><strong>Renforcement
+                                                socio-économique*</strong></label>
+                                        </th>
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Business plus (10 sessions)</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='businessPlus.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='businessPlus.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='businessPlus.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='businessPlus.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='businessPlus.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='businessPlus.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Participation AVEC (date de la
+                                                1èrecotisation)**</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='participationAVEC.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+
+                            <h4><strong>INTERVENTIONS SECONDAIRES</strong></h4>
+                            <div>
+                                <!--Table-->
+                                <table class="table table-responsive table-bordered table-responsive-md">
+
+                                    <!--Table head-->
+                                    <thead class="amber lighten-3">
+                                    <tr>
+                                        <th class="text-center">2</th>
+                                        <th class="text-center">Intervention</th>
+                                        <th class="text-center">Services</th>
+                                        <th class="text-center">Date d’exécution (JJ-MM-AAAA)</th>
+                                        <th class="text-center">Date d’exécution (JJ-MM-AAAA)</th>
+                                        <th class="text-center">Date d’exécution (JJ-MM-AAAA)</th>
+                                        <th class="text-center">Date d’exécution (JJ-MM-AAAA)</th>
+                                        <th class="text-center">Date d’exécution (JJ-MM-AAAA)</th>
+                                        <th class="text-center">Date d’exécution (JJ-MM-AAAA)</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th rowspan="5" class="align-middle text-center">
+                                        </th>
+                                        <th rowspan="5" class="align-middle text-center">
+                                            <label class="label-table">Education Support</label>
+                                        </th>
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Appui frais d’inscriptions, de scolarité et
+                                                d’examens</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiScolaire.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiScolaire.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiScolaire.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiScolaire.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiScolaire.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiScolaire.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Fournitures</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='fournitures.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='fournitures.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='fournitures.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='fournitures.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='fournitures.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='fournitures.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Uniformes scolaires</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='uniformes.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='uniformes.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='uniformes.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='uniformes.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='uniformes.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='uniformes.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Autres (Spécifier)</label>
+                                            <input type="text" ng-model='dossier.autreEducationSupport'
+                                                   class="form-control text-center">
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='autre.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='autre.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='autre.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='autre.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='autre.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='autre.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Alphabétisation</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='alphabetisation.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='alphabetisation.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='alphabetisation.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='alphabetisation.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='alphabetisation.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='alphabetisation.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th rowspan="3" class="align-middle text-center">
+                                        </th>
+                                        <th rowspan="3" class="align-middle text-center">
+                                            <label class="label-table">Accès aux préservatifs</label>
+                                        </th>
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Promotion de l’utilisation des
+                                                préservatifs</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='utilisationPreservatifs.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='utilisationPreservatifs.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='utilisationPreservatifs.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='utilisationPreservatifs.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='utilisationPreservatifs.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='utilisationPreservatifs.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Distribution de préservatifs</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='distributionPreservatifs.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='distributionPreservatifs.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='distributionPreservatifs.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='distributionPreservatifs.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='distributionPreservatifs.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='distributionPreservatifs.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Référence pour mise à disposition de
+                                                préservatifs</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referencePreservatifs.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referencePreservatifs.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referencePreservatifs.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referencePreservatifs.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referencePreservatifs.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referencePreservatifs.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th class="align-middle text-center">
+                                        </th>
+                                        <th class="align-middle text-center">
+                                            <label class="label-table">Contraception mixte</label>
+                                        </th>
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Référence vers services de planning familial
+                                                (SSSU)</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referencVersPF.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referencVersPF.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referencVersPF.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referencVersPF.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referencVersPF.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referencVersPF.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th class="align-middle text-center">
+                                        </th>
+                                        <th class="align-middle text-center">
+                                            <label class="label-table">Conseil et dépistage VIH</label>
+                                        </th>
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Référence active aux services</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceServices.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceServices.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceServices.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceServices.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceServices.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceServices.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th rowspan="6" class="align-middle text-center">
+                                        </th>
+                                        <th rowspan="6" class="align-middle text-center">
+                                            <label class="label-table">Soins post- violence</label>
+                                        </th>
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Référence Médicale</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceMedical.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceMedical.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceMedical.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceMedical.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceMedical.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceMedical.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Référence Psychosociale</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referencePsychoSocial.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referencePsychoSocial.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referencePsychoSocial.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referencePsychoSocial.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referencePsychoSocial.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referencePsychoSocial.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Référence Juridique</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceJuridique.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceJuridique.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceJuridique.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceJuridique.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceJuridique.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceJuridique.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Référence Abri</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceAbri.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceAbri.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceAbri.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceAbri.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceAbri.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceAbri.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Appui aux frais médicaux</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiMedicaux.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiMedicaux.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiMedicaux.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiMedicaux.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiMedicaux.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiMedicaux.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Appui aux frais juridiques</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiJuridiques.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiJuridiques.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiJuridiques.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiJuridiques.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiJuridiques.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiJuridiques.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th class="align-middle text-center">
+                                        </th>
+                                        <th class="align-middle text-center">
+                                            <label class="label-table">Sécurité alimentaire et nutrition</label>
+                                        </th>
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Référence pour soutien nutritionnel (Evaluation,
+                                                conseil ou appui)</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceNutritionnel.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceNutritionnel.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceNutritionnel.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceNutritionnel.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceNutritionnel.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='referenceNutritionnel.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th class="align-middle text-center">
+                                        </th>
+                                        <th class="align-middle text-center">
+                                            <label class="label-table">Protection</label>
+                                        </th>
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Appui à l’établissement de documents
+                                                juridiques</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiDocument.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiDocument.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiDocument.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiDocument.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiDocument.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='appuiDocument.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                            <h4><strong>INTERVENTIONS CONTEXTUELLES</strong></h4>
+                            <div>
+                                <!--Table-->
+                                <table class="table table-responsive table-bordered table-responsive-md">
+
+                                    <!--Table head-->
+                                    <thead class="amber lighten-3">
+                                    <tr>
+                                        <th class="text-center">3</th>
+                                        <th class="text-center">Intervention</th>
+                                        <th class="text-center">Services</th>
+                                        <th class="text-center">Date d’exécution (JJ-MM-AAAA)</th>
+                                        <th class="text-center">Date d’exécution (JJ-MM-AAAA)</th>
+                                        <th class="text-center">Date d’exécution (JJ-MM-AAAA)</th>
+                                        <th class="text-center">Date d’exécution (JJ-MM-AAAA)</th>
+                                        <th class="text-center">Date d’exécution (JJ-MM-AAAA)</th>
+                                        <th class="text-center">Date d’exécution (JJ-MM-AAAA)</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th rowspan="3" class="align-middle text-center">
+                                        </th>
+                                        <th rowspan="3" class="align-middle text-center">
+                                            <label class="label-table">Promotion de la communication
+                                                parents-enfants</label>
+                                        </th>
+                                        <td rowspan="3" class="align-middle text-center">
+                                            <label class="label-table">SINOVOYU (14 sessions)</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='sinovoyu.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='sinovoyu.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='sinovoyu.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='sinovoyu.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='sinovoyu.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='sinovoyu.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='sinovoyu.S7'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='sinovoyu.S8'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='sinovoyu.S9'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='sinovoyu.S10'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='sinovoyu.S11'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='sinovoyu.S12'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='sinovoyu.S13'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='sinovoyu.S14'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th rowspan="3" class="align-middle text-center">
+                                        </th>
+                                        <th rowspan="3" class="align-middle text-center">
+                                            <label class="label-table">Renforcement socioéconomique des ménages</label>
+                                        </th>
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">AVEC</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='AVEC.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='AVEC.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='AVEC.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='AVEC.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='AVEC.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='AVEC.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="align-middle text-center">
+                                            <label class="label-table">Education financière</label>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='educationFinanciere.S1'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='educationFinanciere.S2'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='educationFinanciere.S3'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='educationFinanciere.S4'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='educationFinanciere.S5'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="md-form dates mt-auto">
+                                                <input type="text" ng-model='educationFinanciere.S6'
+                                                       class="form-control text-center">
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="text-center py-4 mt-3">
+                        <button class="btn btn-cyan" type="submit" ng-click="saveDossier()">Enregistrer</button>
+                        <a ui-sref="dossierList({org: orgUnitSelect.id })" class="btn btn-blue-grey" role="button">Annuler</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</main>
+<footer>
+
+</footer>
+
+</body>
+</html>

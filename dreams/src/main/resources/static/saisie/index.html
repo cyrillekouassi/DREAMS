@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<!-- <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="../_lib/font-awesome/css/font-awesome.min.css">
+    <link href="../_lib/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../_lib/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_lib/datepicker/bootstrap-datepicker.min.css">
+    <link href="../_lib/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_css/app.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/tree.css">
+</head>
+
+<body ng-app="saisie">
+
+<!--Main Navigation-->
+<header>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark pink scrolling-navbar">
+        <a class="navbar-brand img-responsive" href="#"><img src="../_img/entete/logo_DREAMS.png"
+                                                             alt="DREAMS CÔTE D'IVOIRE"
+                                                             style="height: 25px; "></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">DREAMS CÔTE D'IVOIRE<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item bg-menu" ng-if="role.affiche_saisie">
+                    <a class="nav-link" href="{{baseUrl+'saisie/index.html'}}">Saisie</a>
+                </li>
+                <li class="nav-item" ng-if="role.affiche_analyse">
+                    <a class="nav-link" href="{{baseUrl+'analyse/index.html'}}">Analyse</a>
+                </li>
+                <li class="nav-item" ng-if="role.affiche_configuration">
+                    <a class="nav-link" href="{{baseUrl+'config/index.html'}}">Configuration</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav nav-flex-icons">
+                <li class="nav-item m-0 p-0">
+                    <img src="../_img/profil/user-female.png" alt="..." class="rounded-circle"
+                         style="width: 35px; height: 35px; margin: auto" size="32">
+                    <img src="../_img/profil/user-male.png" alt="..." class="rounded-circle"
+                         style="width: 35px; height: 35px; margin: auto" size="32">
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><span class="font-italic">Bonjour</span><strong> {{Me.name}}</strong></a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" ng-click="logout()" href="">Deconnexion</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+</header>
+<!--Main Navigation-->
+<main ng-if="role.affiche_saisie">
+
+    <div class="container-fluid">
+        <div class="mt-4 pt-4">
+            <div class="row mt-3 pt-3">
+                <div class="col-2">
+                    <div class="position-fixed">
+                        <div class="card card-cascade narrower w-100">
+                            <div class="view gradient-card-header info-color"><h2 class="h5 mb-0 p-2 text-center white-text">Organisation</h2></div>
+                            <div class="card-body text-left">
+                                <div>
+                                    <div ng-if="!arbrePret">
+                                        <label>Chargement des organisations ...</label>
+                                        <div><img src="../_img/autres/Wedges-3s-200px.apng" alt=""></div>
+                                    </div>
+                                    <div ng-if="arbrePret" class="orgPanel text-info mt-0 pt-0">
+                                        <org-tree org-data="arbre" multi-select="false"
+                                                  get-allselect="toutes_les_donnees(lesSelects)"></org-tree>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-10 mx-0 pl-5">
+                    <div>
+                        <ul class="nav md-pills nav-justified" role="tablist">
+                            <li class="nav-item mr-0 ml-0">
+                                <a class="nav-link btn btn-info mr-0 ml-0" ui-sref="ficheVADList({org: orgUnitSelect.id})" role="tab">Viste à Domicile</a>
+                            </li>
+                            <li class="nav-item mr-0 ml-0">
+                                <a class="nav-link btn btn-secondary mr-0 ml-0" ui-sref="ficheReferenceList({org: orgUnitSelect.id})" role="tab">Reference - Contre-reference</a>
+                            </li>
+                            <li class="nav-item mr-0 ml-0">
+                                <a class="nav-link btn btn-default mr-0 ml-0" ui-sref="activiteGroupeList({org: orgUnitSelect.id})" role="tab">Activités de groupe</a>
+                            </li>
+                            <!--<li class="nav-item mr-0 ml-0">
+                                <a class="nav-link btn btn-info mr-0 ml-0" ui-sref="enrol_List({org: orgUnitSelect.id})" role="tab">Enrolement</a>
+                            </li>-->
+                            <li class="nav-item mr-0 ml-0">
+                                <a class="nav-link btn btn-info mr-0 ml-0" ui-sref="dossierList({org: orgUnitSelect.id})" role="tab">Dossier du Bénéficiaire</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-5 ml-3">
+                        <ui-view></ui-view>
+                    </div>
+
+                </div>
+                <div class="espacemt"></div>
+                <div class="espacemt"></div>
+                <div class="espacemt"></div>
+                <div class="espacemt"></div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <!-- Card -->
+
+    <!-- Card -->
+
+
+</main>
+<footer>
+
+</footer>
+<!-- Start your project here-->
+
+<!-- /Start your project here-->
+
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript" src="../_lib/js/jquery-3.2.1.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="../_lib/js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="../_lib/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="../_lib/js/mdb.min.js"></script>
+<script src="../_lib/datepicker/bootstrap-datepicker.min.js"></script>
+<script src="../_lib/datepicker/bootstrap-datepicker.fr.min.js"></script>
+<script src="../_lib/angular/angular.min.js"></script>
+<script src="../_lib/angular/angular-animate.min.js"></script>
+<script src="../_lib/angular/angular-ui-router.min.js"></script>
+<script src="../_lib/angular/angular-aria.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/controllers/dossierBeneficiaireCTRL.js"></script>
+<script src="js/controllers/dossierBeneficiaireListCTRL.js"></script>
+<script src="js/controllers/activiteGroupeCTRL.js"></script>
+<script src="js/controllers/activiteGroupeListCTRL.js"></script>
+<script src="js/controllers/ficheReferenceCTRL.js"></script>
+<script src="js/controllers/ficheReferenceListCTRL.js"></script>
+<script src="js/controllers/ficheVADCTRL.js"></script>
+<script src="js/controllers/ficheVadListCTRL.js"></script>
+<script src="js/controllers/accueilCTRL.js"></script>
+<script src="js/controllers/enrolement/enrol_List_Ctrl.js"></script>
+<script src="js/controllers/enrolement/enrol_SA_ctrl.js"></script>
+
+<script src="js/directives/stringToNumber.js"></script>
+<script src="js/directives/tree_Directive.js"></script>
+
+</body>
+
+</html>

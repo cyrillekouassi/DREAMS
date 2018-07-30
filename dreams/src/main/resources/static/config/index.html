@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="../_lib/font-awesome/css/font-awesome.min.css">
+    <link href="../_lib/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../_lib/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_lib/datepicker/bootstrap-datepicker.min.css">
+    <link href="../_lib/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_css/app.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/tree.css">
+</head>
+
+<body ng-app="config">
+
+<!--Main Navigation-->
+<header>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark pink scrolling-navbar">
+        <!--a class="navbar-brand" href="#"><strong>Navbar</strong></a-->
+        <a class="navbar-brand img-responsive" href="#"><img src="../_img/entete/logo_DREAMS.png"
+                                                             alt="DREAMS CÔTE D'IVOIRE"
+                                                             style="height: 25px; "></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">DREAMS CÔTE D'IVOIRE<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item" ng-if="role.affiche_saisie">
+                    <a class="nav-link" href="{{baseUrl+'saisie/index.html'}}">Saisie</a>
+                </li>
+                <li class="nav-item" ng-if="role.affiche_analyse">
+                    <a class="nav-link" href="{{baseUrl+'analyse/index.html'}}">Analyse</a>
+                </li>
+                <li class="nav-item bg-menu" ng-if="role.affiche_configuration">
+                    <a class="nav-link" href="{{baseUrl+'config/index.html'}}">Configuration</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav nav-flex-icons">
+                <li class="nav-item m-0 p-0">
+                    <img src="../_img/profil/user-female.png" alt="..." class="rounded-circle"
+                         style="width: 35px; height: 35px; margin: auto" size="32">
+                    <img src="../_img/profil/user-male.png" alt="..." class="rounded-circle"
+                         style="width: 35px; height: 35px; margin: auto" size="32">
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><span class="font-italic">Bonjour</span><strong> {{Me.name}}</strong></a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" ng-click="logout()" href="">Deconnexion</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+</header>
+<!--Main Navigation-->
+<main ng-if="role.affiche_configuration">
+    <ul class="nav nav-tabs nav-justified info-color-dark mt-5 mt-5" role="tablist">
+        <li class="nav-item" ng-if="role.creer_modifier_organisation">
+            <a class="nav-link active waves-ligh text-white" ui-sref="org" role="tab">Organisation</a>
+        </li>
+        <li class="nav-item" ng-if="role.creer_modifier_utilisateur">
+            <a class="nav-link text-white" ui-sref="user">Utilisateur</a>
+        </li>
+        <li class="nav-item" ng-if="role.creer_modifier_roles">
+            <a class="nav-link text-white" ui-sref="roles" role="tab">Roles</a>
+        </li>
+        <li class="nav-item" ng-if="role.creer_modifier_programme">
+            <a class="nav-link text-white" ui-sref="programme" role="tab">Programme</a>
+        </li>
+        <li class="nav-item" ng-if="role.creer_modifier_element">
+            <a class="nav-link text-white" ui-sref="element" role="tab">Elements</a>
+        </li>
+        <li class="nav-item" ng-if="role.creer_modifier_ensembleOption">
+            <a class="nav-link text-white" ui-sref="ensembleOption" role="tab">Ensemble Option</a>
+        </li>
+        <li class="nav-item" ng-if="role.importer_elements_donnees">
+            <a class="nav-link text-white" ui-sref="imports" role="tab">Imports</a>
+        </li>
+    </ul>
+    <div class="mt-5 ml-3">
+        <ui-view></ui-view>
+    </div>
+    <div class="espacemt"></div>
+    <div class="espacemt"></div>
+    <div class="espacemt"></div>
+    <div class="espacemt"></div>
+
+</main>
+<footer>
+
+</footer>
+<!-- Start your project here-->
+
+<!-- /Start your project here-->
+
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript" src="../_lib/js/jquery-3.2.1.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="../_lib/js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="../_lib/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="../_lib/js/mdb.min.js"></script>
+<script src="../_lib/datepicker/bootstrap-datepicker.min.js"></script>
+<script src="../_lib/datepicker/bootstrap-datepicker.fr.min.js"></script>
+<script src="../_lib/angular/angular.min.js"></script>
+<script src="../_lib/angular/angular-animate.min.js"></script>
+<script src="../_lib/angular/angular-ui-router.min.js"></script>
+<script src="../_lib/angular/angular-aria.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/controllers/accueilCTRL.js"></script>
+<script src="js/controllers/usersCTRL.js"></script>
+<script src="js/controllers/organisationCTRL.js"></script>
+<script src="js/controllers/importCTRL.js"></script>
+<script src="js/controllers/rolesUserCTRL.js"></script>
+
+<!--<script src="js/directives/stringToNumber.js"></script> -->
+<script src="js/directives/tree_Directive.js"></script>
+<script src="js/directives/fileModel.js"></script>
+
+</body>
+
+</html>

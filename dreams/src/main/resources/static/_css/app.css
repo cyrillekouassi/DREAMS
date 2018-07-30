@@ -1,0 +1,16 @@
+.versbas{
+    margin-top: 250px;
+}
+.bordureDroit{
+    border-right: solid lightgrey 2px;
+}
+.lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+.espacemt{
+    margin: 15px;
+}
+.bg-menu{
+    background-color: #0d5bdd;
+}

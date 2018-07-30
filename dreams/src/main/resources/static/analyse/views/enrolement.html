@@ -1,0 +1,37 @@
+<div class="card mt-5 mr-0 ml-0 mb-3">
+    <div class="card-body text-left">
+        <h3 class="text-center purple-text"><strong>Enrolement</strong></h3>
+        <div>
+            <div ng-if="noData" style="margin: 150px 150px 150px 150px;"
+                 class="text-center mt-5 p-2 red-text font-weight-bold">
+                <p><i class="fa fa-bug fa-3x red-text" aria-hidden="true"></i><label>Pas de données</label></p>
+            </div>
+            <div ng-if="!noData">
+                <div ng-if="chargement">
+                    <label>Chargement en cours .....</label>
+                </div>
+                <div ng-if="!chargement">
+                    <table class="table table-bordered table-responsive mt-3 table-sm tableResp">
+                        <thead class="default-color-dark text-center white-text">
+                        <tr>
+                            <th>No</th>
+                            <th ng-repeat="nom in enrolEntete track by $index">
+                                {{nom.element.name}}
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-center">
+                        <tr ng-repeat="enr in listEnrol track by $index">
+                            <th scope="row" class="align-middle primary-color white-text">{{$index + 1}}</th>
+                            <td ng-repeat="nom in enrolEntete track by $index" class="align-middle">
+                                <p ng-repeat="val in enr[nom.element.code]">{{val}}</p>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

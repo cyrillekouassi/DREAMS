@@ -1,0 +1,834 @@
+<div class="container-fluid">
+    <div>
+
+        <div class="card">
+            <div class="view gradient-card-header purple-gradient">
+                <div class="modal-header default-color white-text">
+                    <h4 class="title">
+                        ACTIVITE DE GROUPE / INDIVIDUELLE</h4>
+                </div>
+            </div>
+
+            <!-- Card body -->
+            <div class="card-body">
+
+
+                <div>
+                    <p class="h4 text-center py-4">FICHE D’ACTIVITE DE GROUPE/INDIVIDUELLE</p>
+
+                    <div style="padding: 10px;">
+                        <div class="row border border-primary">
+                            <div class="col-md-6  mt-3">
+                                    <label for="organisation" class="font-weight-light mb-0">Organisation </label>
+                                    <input type="text" id="organisation" class="form-control mt-0" ng-model="groupe.nomOrganisation" ng-blur="saveValue('nomOrganisation',groupe.nomOrganisation)">
+
+                            </div>
+                                <div class="col-md-6  mt-3">
+                                        <label for="safespace" class="font-weight-light mb-0">Nom de « l’espace sur
+                                            » </label>
+                                        <input type="text" id="safespace" class="form-control mt-0" ng-model="groupe.nomSafespace" ng-blur="saveValue('nomSafespace',groupe.nomSafespace)">
+                                </div>
+                        </div>
+                        <div class="row border border-primary">
+                            <div class="col-6 border border-primary">
+                                <p class="h6 mt-2"><strong>Agent de sensibilisation principal</strong></p>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="nomAgentprin" class="font-weight-light mb-0">Nom </label>
+                                            <input type="text" id="nomAgentprin" class="form-control mt-0" ng-model="groupe.nomAgentPrinc" ng-blur="saveValue('nomAgentPrinc',groupe.nomAgentPrinc)">
+                                    </div>
+                                    <div class="col">
+                                        <label for="prenomAgentprin" class="font-weight-light mb-0">Prénoms </label>
+                                            <input type="text" id="prenomAgentprin" class="form-control mt-0" ng-model="groupe.prenomAgentPrinc" ng-blur="saveValue('prenomAgentPrinc',groupe.prenomAgentPrinc)">
+                                    </div>
+                                </div>
+                                <label for="contactprin" class="font-weight-light mb-0">Contact </label>
+                                    <input type="number" id="contactprin" string-to-number class="form-control mt-0" ng-model="groupe.contactAgentPrinc" ng-blur="saveValue('contactAgentPrinc',groupe.contactAgentPrinc)">
+                            </div>
+                            <div class="col-6 border border-primary">
+                                <p class="h6 mt-2"><strong>Agent de sensibilisation secondaire</strong></p>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="nomAgentsec" class="font-weight-light mb-0">Nom </label>
+
+                                            <input type="text" id="nomAgentsec" class="form-control mt-0" ng-model="groupe.nomAgentSecond" ng-blur="saveValue('nomAgentSecond',groupe.nomAgentSecond)">
+                                    </div>
+                                    <div class="col">
+                                        <label for="prenomAgentsec" class="font-weight-light mb-0">Prénoms </label>
+                                            <input type="text" id="prenomAgentsec" class="form-control mt-0" ng-model="groupe.prenomAgentSecond" ng-blur="saveValue('prenomAgentSecond',groupe.prenomAgentSecond)">
+
+                                    </div>
+                                </div>
+                                <label for="contactsec" class="font-weight-light mb-0">Contact </label>
+                                <input type="number" id="contactsec" class="form-control mt-0" string-to-number ng-model="groupe.contactAgentSecond" ng-blur="saveValue('contactAgentSecond',groupe.contactAgentSecond)">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                        <div class="row" style="border: dashed grey 1px;">
+                            <div class="col">
+                                <p class="h6"><label>Localisation</label></p>
+                                <div class="mt-3">
+                                    <label for="region" class="font-weight-light mb-0">Région</label>
+                                    <input type="text" id="region" class="form-control mt-0" ng-model="groupe.region" ng-blur="saveValue('region',groupe.region)">
+                                </div>
+                                    <div>
+                                        <label for="sp" class="font-weight-light mb-0">Sous-Préfecture </label>
+                                        <input type="text" id="sp" class="form-control mt-0" ng-model="groupe.sousPrefect" ng-blur="saveValue('sousPrefect',groupe.sousPrefect)">
+                                    </div>
+                                    <div>
+                                    <label for="commune" class="font-weight-light mb-0">Commune</label>
+                                    <input type="text" id="commune" class="form-control mt-0" ng-model="groupe.commune" ng-blur="saveValue('commune',groupe.commune)">
+                                </div>
+                            </div>
+                            <div class="col  p-3">
+                                <div class="mt-5">
+                                    <label for="district" class="font-weight-light mb-0">District Sanitaire</label>
+                                    <input type="text" id="district" class="form-control mt-0" ng-model="groupe.district" ng-blur="saveValue('district',groupe.district)">
+                                </div>
+                                <div>
+                                    <label for="quatier" class="font-weight-light mb-0">Quartier ou se tient
+                                        l’activité</label>
+                                    <input type="text" id="quatier" class="form-control mt-0" ng-model="groupe.quartier" ng-blur="saveValue('quartier',groupe.quartier)">
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-group mt-5">
+
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="lead">
+                                        <span class="badge default-color">Information sur les sessions </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-3 px-0 mx-0">
+                                            <div class="form-check p-2">
+                                                <input class="form-check-input" name="typeActivite" type="radio"
+                                                       id="radio201" value="groupe" ng-model="groupe.infoSession" ng-change="saveValue('infoSession',groupe.infoSession)">
+                                                <label class="form-check-label" for="radio201">Séance groupe</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-2 px-0 mx-0">
+                                            <div class="form-check p-2">
+                                                <input class="form-check-input" name="typeActivite" type="radio"
+                                                       id="radio202" value="individuel" ng-model="groupe.infoSession" ng-change="saveValue('infoSession',groupe.infoSession)">
+                                                <label class="form-check-label" for="radio202">Individuel</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 px-0 mx-0">
+                                            <div class="form-check p-2">
+                                                <input class="form-check-input with-gap p-2" name="typeActivite"
+                                                       type="radio" id="radio203" value="masse" ng-model="groupe.infoSession" ng-change="saveValue('infoSession',groupe.infoSession)">
+                                                <label class="form-check-label" for="radio203">Activité de masse</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group  mt-0">
+                        <div class="form-row">
+                            <div class="col-2 px-0 mx-0 mr-0">
+                                <span class="badge info-color-dark p-3">THEMATIQUE </span>
+                            </div>
+                            <div class="col-4 mr-auto mt-0 pt-0 ml-0">
+
+                                <select class="mdb-select" name="ngvalueselect" ng-model="groupe.thematique" ng-change="saveValue('thematique',groupe.thematique)">
+                                    <option ng-repeat="option in thematique.availableOptions" ng-value="option.value">{{option.name}}</option>
+                                </select>
+                            </div>
+                            <div class="col-auto"></div>
+                            <div class="col-2">
+                                <div class="col-2 px-0 mx-0 mr-0">
+                                    <span class="badge info-color-dark p-3">Tranche d'âge </span>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <select class="mdb-select colorful-select dropdown-primary" ng-model="groupe.trancheAge" ng-change="saveValue('trancheAge',groupe.trancheAge)">
+                                    <option ng-repeat="option in trancheAge.availableOptions" ng-value="option.value">{{option.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div>
+                        <div class="card p-2 mb-5 border border-warning">
+                            <div class="card-header">
+                                <div method="post">
+                                    <div class="form-row">
+                                        <!-- Grid column -->
+                                        <div class="col-md-auto" style="width: 100px;">
+                                            <div class="form-group mt-0">
+                                                <label>Date</label>
+                                                <div class="md-form dates mt-0">
+                                                    <input type="text" id="date" class="form-control" ng-model="groupeSession.dateSession">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-auto" style="width: 175px;">
+                                            <div class="form-group mt-0">
+                                                <label>Thème abordé</label>
+                                                <div class="md-form mt-0">
+                                                    <input type="text" id="theme" class="form-control" ng-model="groupeSession.themeAborde">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-auto">
+                                            <div class="form-group align-self-center">
+                                                <label>Méthodologies utilisés</label>
+                                                    <input class="form-control" style="width: 190px;" ng-focus="methodfocus()" type="text" ng-model="methodInfo">
+                                                <div class="modal fade" id="modalMethod" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document" data-backdrop="false">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header text-center">
+                                                                <h4 class="modal-title w-100 font-weight-bold">Méthodologies utilisés</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="cm1" ng-model='method.brainstorming'>
+                                                                    <label class="form-check-label" for="cm1">
+                                                                        Brainstorming
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="cm2" ng-model='method.questionReponse'>
+                                                                    <label class="form-check-label" for="cm2">
+                                                                        Question réponse
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="cm3" ng-model='method.jeuValeur'>
+                                                                    <label class="form-check-label" for="cm3">
+                                                                        Jeu de valeur
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="cm4" ng-model='method.jeuRole'>
+                                                                    <label class="form-check-label" for="cm4">
+                                                                        Jeu de rôle
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="cm5" ng-model='method.ecoute'>
+                                                                    <label class="form-check-label" for="cm5">
+                                                                        Ecoute
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="cm6" ng-model='method.spotFilm'>
+                                                                    <label class="form-check-label" for="cm6">
+                                                                        Spot radiophonique/Film
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="cm7" ng-model='method.causerie'>
+                                                                    <label class="form-check-label" for="cm7">
+                                                                        Causerie/discussion
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="cm8" ng-model='method.demoPreservatif'>
+                                                                    <label class="form-check-label" for="cm8">
+                                                                        Démonstration du port correct du préservatif
+                                                                    </label>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <a class="btn btn-primary text-center" data-dismiss="modal" role="button" ng-click="saveMethode()">Ajouter</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-auto mr-2" style="width: 150px;">
+                                            <div class="form-group align-self-center">
+                                                <label>Outils utilisés</label>
+
+                                                    <input class="form-control" ng-focus="outilfocus()" type="text" ng-model="outilsInfo">
+                                                <div class="modal fade" id="modalOutil" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document" data-backdrop="false">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header text-center">
+                                                                <h4 class="modal-title w-100 font-weight-bold">Outils utilisés</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="co1" ng-model='outil.penisBois'>
+                                                                    <label class="form-check-label" for="co1">
+                                                                        Penis en bois
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="co2" ng-model='outil.zoe'>
+                                                                    <label class="form-check-label" for="co2">
+                                                                        Zoë
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="co3" ng-model='outil.albumPhotos'>
+                                                                    <label class="form-check-label" for="co3">
+                                                                        Album photos
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="co4" ng-model='outil.image'>
+                                                                    <label class="form-check-label" for="co4">
+                                                                        Boite a image
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="co5" ng-model='outil.cassette'>
+                                                                    <label class="form-check-label" for="co5">
+                                                                        Cassettes / cd / dvd / usb
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="co6" ng-model='outil.autres'>
+                                                                    <label class="form-check-label" for="co6">
+                                                                        Autres
+                                                                    </label>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <a class="btn btn-primary text-center" data-dismiss="modal" role="button" ng-click="saveOutils()">Ajouter</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-auto">
+                                            <div class="form-group">
+                                                <label>Matériels et quantité distribués</label>
+                                                        <input class="form-control" ng-focus="MQfocus()" type="text" ng-model="MqteInfo">
+                                                        <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="true" aria-hidden="true" style="display: none;">
+                                                            <div class="modal-dialog" role="document" data-backdrop="false">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header text-center">
+                                                                        <h4 class="modal-title w-100 font-weight-bold">Matériels et quantités distribués</h4>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body mx-3">
+                                                                        <table class="table table-bordered table-sm">
+                                                                            <thead class="text-center">
+                                                                            <tr>
+                                                                                <th>Matériels distribués</th>
+                                                                                <th>Quantité distribuée</th>
+                                                                            </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div class="form-check mt-3">
+                                                                                        <input class="form-check-input" type="checkbox" id="ch101" ng-model='materiel.preserMasc' ng-change="changeMateriel('preserMasc')">
+                                                                                        <label class="form-check-label" for="ch101">
+                                                                                            1. Preservatifs masculins
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="align-self-center align-items-center px-0 py-0">
+                                                                                    <div class="md-form mx-0 my-0 px-0 py-0">
+                                                                                        <input type="number" string-to-number class="form-control text-center" ng-model='preserMasc' ng-if='materiel.preserMasc' ng-blur="saveQuantite('preserMasc',preserMasc)">
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div class="form-check mt-3">
+                                                                                        <input class="form-check-input" type="checkbox" id="ch102" ng-model='materiel.preserFemin' ng-change="changeMateriel('preserFemin')">
+                                                                                        <label class="form-check-label" for="ch102">
+                                                                                            2. Preservatifs feminins
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="align-self-center align-items-center px-0 py-0">
+                                                                                    <div class="md-form mx-0 my-0 px-0 py-0">
+                                                                                        <input type="number" string-to-number class="form-control text-center" ng-model='preserFemin' ng-blur="saveQuantite('preserFemin',preserFemin)"  ng-if='materiel.preserFemin'>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div class="form-check mt-3">
+                                                                                        <input class="form-check-input" type="checkbox" id="ch103" ng-model='materiel.affiches' ng-change="changeMateriel('affiches')">
+                                                                                        <label class="form-check-label" for="ch103">
+                                                                                            3.Affiches
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="align-self-center align-items-center px-0 py-0">
+                                                                                    <div class="md-form mx-0 my-0 px-0 py-0">
+                                                                                        <input type="number" string-to-number class="form-control text-center" ng-model='affiches' ng-blur="saveQuantite('affiches',affiches)" ng-if='materiel.affiches'>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div class="form-check mt-3">
+                                                                                        <input class="form-check-input" type="checkbox" id="ch104" ng-model='materiel.depliants' ng-change="changeMateriel('depliants')">
+                                                                                        <label class="form-check-label" for="ch104">
+                                                                                            4. Depliants / brochures
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="align-self-center align-items-center px-0 py-0">
+                                                                                    <div class="md-form mx-0 my-0 px-0 py-0">
+                                                                                        <input type="number" string-to-number class="form-control text-center" ng-model='depliants' ng-blur="saveQuantite('depliants',depliants)" ng-if='materiel.depliants'>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div class="form-check mt-3">
+                                                                                        <input class="form-check-input" type="checkbox" id="ch105" ng-model='materiel.teeshirts' ng-change="changeMateriel('teeshirts')">
+                                                                                        <label class="form-check-label" for="ch105">
+                                                                                            5. Tee-shirts
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="align-self-center align-items-center px-0 py-0">
+                                                                                    <div class="md-form mx-0 my-0 px-0 py-0">
+                                                                                        <input type="number" string-to-number class="form-control text-center" ng-model='teeshirts' ng-blur="saveQuantite('teeshirts',teeshirts)" ng-if='materiel.teeshirts'>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div class="form-check mt-3">
+                                                                                        <input class="form-check-input" type="checkbox" id="ch106" ng-model='materiel.BlocNoteStylo' ng-change="changeMateriel('BlocNoteStylo')">
+                                                                                        <label class="form-check-label" for="ch106">
+                                                                                            6. Bloc Note/Stylo
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="align-self-center align-items-center px-0 py-0">
+                                                                                    <div class="md-form mx-0 my-0 px-0 py-0">
+                                                                                        <input type="number" string-to-number class="form-control text-center" ng-model='BlocNoteStylo' ng-blur="saveQuantite('BlocNoteStylo',BlocNoteStylo)" ng-if='materiel.BlocNoteStylo'>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div class="form-check mt-3">
+                                                                                        <input class="form-check-input" type="checkbox" id="ch107" ng-model='materiel.autres'  ng-change="changeMateriel('autres')">
+                                                                                        <label class="form-check-label" for="ch107">
+                                                                                            7. Autres
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="align-self-center align-items-center px-0 py-0">
+                                                                                    <div class="md-form mx-0 my-0 px-0 py-0">
+                                                                                        <input type="number" string-to-number class="form-control text-center" ng-model='autres' ng-blur="saveQuantite('autres',autres)" ng-if='materiel.autres'>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            </tbody>
+
+                                                                        </table>
+                                                                        <a class="btn btn-primary text-center" data-dismiss="modal" role="button" ng-click="saveMaterial()">Ajouter</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-auto align-self-center ml-0 mr-0">
+                                            <div class="mt-0 ml-0 mr-0" style="width: 50px;">
+                                                <button type="submit" ng-click="saveSession()" class="btn-floating blue-gradient ml-0 mr-0"><i class="fa fa-save"></i>
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="mt-0">
+                                    <div class="table-responsive mt-3 table-sm">
+
+                                    </div>
+                                    <table class="table table-bordered w-100">
+                                        <thead>
+                                        <tr class="text-center">
+                                            <th style="width: 50px;">Nº Sessions</th>
+                                            <th>Date</th>
+                                            <th>Thème abordé</th>
+                                            <th>Méthodologie utilisée</th>
+                                            <th>outils utilisés</th>
+                                            <th>Matériels et quantité distribués</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="text-center" ng-repeat="session in sessionData">
+                                            <th>{{$index + 1}}</th>
+                                            <td>{{session.dateSession.value}}</td>
+                                            <td>{{session.themeAborde.value}}</td>
+                                            <td><span><p ng-repeat="meth in session.methodologie.value">{{meth}}</p></span> </td>
+                                            <td><p ng-repeat="out in session.outils.value">{{out}}</p></td>
+                                            <td><p ng-repeat="mqte in session.materielQuantite.value">{{mqte}}</p></td>
+                                            <td><a ng-click="modifierSession(session)"><i class="fa fa-pencil indigo-text" aria-hidden="true"></i></a>
+                                            </td>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <div class="mt-5 nav-justified text-center">
+                            <span class="badge info-color-dark p-2 text-center nav-justified">TABLEAU RESERVE AUX BENEFICIAIRES </span>
+                        </div>
+                        <div class="card p-2 mb-5">
+                            <div class="card-header">
+                                <form method="post">
+
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-grop">
+                                            <label>Code du bénéficiaire</label>
+                                            <div class="md-form mt-0">
+                                                <input type="text" class="form-control mb-0" ng-model="groupeBenef.id_dreams" ng-change="searchId(groupeBenef.id_dreams)"/>
+                                                <div class="list-group position-absolute mt-0" id="list-tab" role="tablist">
+                                                    <a ng-repeat="idDreams in valueComplete track by $index" ng-click="choisir(idDreams)" class="list-group-item list-group-item-action text-left bgSearch" data-toggle="list" role="tab">{{idDreams}}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-grop">
+                                            <label>Nom et prénoms</label>
+                                            <div class="md-form mt-0">
+                                                <input type="text" class="form-control" ng-model="groupeBenef.nomPrenomBenef">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-grop">
+                                            <label>Contacts</label>
+                                            <div class="md-form mt-0">
+                                                <input type="text" class="form-control" ng-model="groupeBenef.contactBenef">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto align-self-center align-self-end">
+                                        <div class="mt-0">
+                                            <button type="submit" class="btn-floating blue-gradient" ng-click="saveBenef()"><i class="fa fa-save"></i>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered table-responsive mt-3 table-sm tableResp">
+                                    <thead class="text-center">
+                                    <tr>
+                                        <th rowspan="2">No</th>
+                                        <th rowspan="2">Nom et prénoms</th>
+                                        <th rowspan="2">Code du bénéficiaire</th>
+                                        <th rowspan="2">Contacts</th>
+                                        <th colspan="24">Participations aux sessions</th>
+                                        <th rowspan="2" style="width: 50px;">Ayant Terminé</th>
+                                    </tr>
+                                    <tr>
+
+                                        <th>1</th>
+                                        <th>2</th>
+                                        <th>3</th>
+                                        <th>4</th>
+                                        <th>5</th>
+                                        <th>6</th>
+                                        <th>7</th>
+                                        <th>8</th>
+                                        <th>9</th>
+                                        <th>10</th>
+                                        <th>11</th>
+                                        <th>12</th>
+                                        <th>13</th>
+                                        <th>14</th>
+                                        <th>15</th>
+                                        <th>16</th>
+                                        <th>17</th>
+                                        <th>18</th>
+                                        <th>19</th>
+                                        <th>20</th>
+                                        <th>21</th>
+                                        <th>22</th>
+                                        <th>23</th>
+                                        <th>24</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="benef in ListBenef" class="text-center">
+                                        <th>{{$index + 1}}</th>
+                                        <td>{{benef.nomPrenomBenef.value}}</td>
+                                        <td>{{benef.id_dreams.value}}</td>
+                                        <td>{{benef.contactBenef.value}}</td>
+
+                                        <td ng-repeat="(key,value) in benef.benefSession">
+                                            <div class="form-check">
+                                                <input class="form-check-input filled-in" type="checkbox" ng-model="value" ng-change="changeSessionBenef(benef,key,value,$index)"
+                                                       id="{{$parent.$index+key+$index}}">
+                                                <label class="form-check-label" for="{{$parent.$index+key+$index}}">
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input filled-in" type="checkbox" ng-model="benef.benefAyantTernime" ng-change="changeSessionBenefTermine(benef,benef.benefAyantTernime)"
+                                                       id="{{'c10025'+ $index}}">
+                                                <label class="form-check-label" for="{{'c10025'+ $index}}">
+                                                </label>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                    <tfoot class="text-center">
+                                    <tr ng-if="ListBenef.length != 0">
+                                        <th colspan="4" >Total</th>
+                                        <th ng-repeat="total in TotalBenef.totalBenefSession.totalBenefSession track by $index">{{total}}</th>
+                                        <th>{{TotalBenef.totalBenefAyantTernime.totalBenefAyantTernime}}</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <form>
+                        <div class="mt-5 nav-justified text-center">
+                            <span class="badge secondary-color-dark p-2 text-center nav-justified">TABLEAU RESERVE A D’AUTRES CIBLES </span>
+                        </div>
+                        <div class="card p-2 mb-5">
+                            <div class="card-header">
+                                <form method="post">
+
+
+                                <div class="form-row">
+                                    <div class="col-md-auto">
+                                        <div class="form-grop">
+                                            <label>Code d’identification
+                                                de la bénéficiaire</label>
+                                            <div class="md-form mt-0">
+                                                <input type="text" class="form-control mb-0" ng-model="groupeAutreCible.codeBenef" ng-change="searchCode(groupeAutreCible.codeBenef)">
+                                                <div class="list-group position-absolute mt-0" role="tablist">
+                                                    <a ng-repeat="idDreams in valueCompleteCode track by $index" ng-click="choisirCode(idDreams)" class="list-group-item list-group-item-action text-left bgSearch" data-toggle="list" role="tab">{{idDreams}}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto">
+                                        <div class="form-grop">
+                                            <label>Nom et prénoms</label>
+                                            <div class="md-form mt-0">
+                                                <input type="text" class="form-control" ng-model="groupeAutreCible.nomPrenomAutreCible">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto">
+                                        <div class="form-grop">
+                                            <label>Contacts</label>
+                                            <div class="md-form mt-0">
+                                                <input type="text" class="form-control" ng-model="groupeAutreCible.contactAutreCible">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto">
+                                        <div class="form-group align-self-center" style="width: 150px;">
+                                            <label>Sexe</label>
+                                            <select class="mdb-select colorful-select dropdown-primary" ng-model="groupeAutreCible.sexeAutreCible">
+                                                <option value="" disabled selected>Choisir le sexe</option>
+                                                <option value="M">Masculin</option>
+                                                <option value="F">Feminin</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto align-self-center align-self-end mx-0">
+                                        <div class="mt-0">
+                                            <button class="btn-floating blue-gradient" type="submit" ng-click="saveAutreCible()"><i class="fa fa-save"></i>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered table-responsive w-auto mt-3 table-sm">
+                                    <thead class="text-center">
+                                    <tr>
+                                        <th rowspan="2">No</th>
+                                        <th rowspan="2">Nom et prénoms</th>
+                                        <th rowspan="2">Code du bénéficiaire</th>
+                                        <th rowspan="2">Contacts</th>
+                                        <th rowspan="2">Sexe</th>
+                                        <th colspan="24">Participations aux sessions</th>
+                                        <th colspan="2" style="width: 50px;">Ayant Terminé</th>
+                                    </tr>
+                                    <tr>
+
+                                        <th>1</th>
+                                        <th>2</th>
+                                        <th>3</th>
+                                        <th>4</th>
+                                        <th>5</th>
+                                        <th>6</th>
+                                        <th>7</th>
+                                        <th>8</th>
+                                        <th>9</th>
+                                        <th>10</th>
+                                        <th>11</th>
+                                        <th>12</th>
+                                        <th>13</th>
+                                        <th>14</th>
+                                        <th>15</th>
+                                        <th>16</th>
+                                        <th>17</th>
+                                        <th>18</th>
+                                        <th>19</th>
+                                        <th>20</th>
+                                        <th>21</th>
+                                        <th>22</th>
+                                        <th>23</th>
+                                        <th>24</th>
+                                        <th>M</th>
+                                        <th>F</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="autre in ListAutreCible" class="text-center">
+                                        <th>{{$index + 1}}</th>
+                                        <td>{{autre.nomPrenomAutreCible.value}}</td>
+                                        <td>{{autre.codeBenef.value}}</td>
+                                        <td>{{autre.contactAutreCible.value}}</td>
+                                        <td>{{autre.sexeAutreCible.value}}</td>
+
+                                        <td ng-repeat="(key,value) in autre.autreCibleSession" class="align-items-center">
+                                            <div class="form-check">
+                                                <input class="form-check-input filled-in" type="checkbox" ng-model="value" ng-change="changeSessionAutre(autre,key,value,$index)"
+                                                       id="{{'a'+$parent.$index+key+$index}}">
+                                                <label class="form-check-label" for="{{'a'+$parent.$index+key+$index}}">
+                                                </label>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input filled-in" type="checkbox" ng-model="autre.autreCibleAyantTernimeMasc" ng-disabled="autre.sexeAutreCible.etat.F" ng-change="changeSessionAutreTermineMasc(autre,autre.autreCibleAyantTernimeMasc)"
+                                                       id="{{'Masc'+$index}}">
+                                                <label class="form-check-label" for="{{'Masc'+$index}}">
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input filled-in" type="checkbox" ng-model="autre.autreCibleAyantTernimeFem" ng-disabled="autre.sexeAutreCible.etat.M" ng-change="changeSessionAutreTermineFem(autre,autre.autreCibleAyantTernimeFem)"
+                                                       id="{{'fem'+$index}}">
+                                                <label class="form-check-label" for="{{'fem'+$index}}">
+                                                </label>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+                                    </tbody>
+                                    <tfoot class="text-center">
+                                    <tr ng-if="ListAutreCible.length != 0">
+                                        <th colspan="5" >Total</th>
+                                        <th ng-repeat="total in TotalAutreCible.totalAutreCibleSession.totalAutreCibleSession track by $index">{{total}}</th>
+                                        <th>{{TotalAutreCible.totalAutreCibleAyantTernimeMasc.totalAutreCibleAyantTernimeMasc}}</th>
+                                        <th>{{TotalAutreCible.totalAutreCibleAyantTernimeFem.totalAutreCibleAyantTernimeFem}}</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="text-center py-4 mt-3">
+                        <a class="btn btn-cyan" ui-sref="activiteGroupeList({org: orgUnitSelect.id})">Enregistrer</a>
+                        <a class="btn btn-blue-grey" ui-sref="activiteGroupeList({org: orgUnitSelect.id})" >Annuler</a>
+                    </div>
+                </div>
+                <!-- Material form register -->
+
+            </div>
+            <!-- Card body -->
+
+        </div>
+
+
+    </div>
+
+</div>
+<!-- Initializations -->
+<script>
+    // SideNav Initialization
+    $(".button-collapse").sideNav();
+
+    // Material Select Initialization
+    $(document).ready(function () {
+        $('.mdb-select').material_select();
+    });
+
+
+
+    $(function () {
+        // Tooltip Initialization
+        $('[data-toggle="tooltip"]').tooltip();
+
+        $('.dates input').datepicker({
+            format: "dd-mm-yyyy",
+            weekStart: 1,
+            todayBtn: "linked",
+            clearBtn: true,
+            language: "fr",
+            daysOfWeekHighlighted: "0,6",
+            autoclose: true,
+            todayHighlight: true
+        });
+    });
+</script>
