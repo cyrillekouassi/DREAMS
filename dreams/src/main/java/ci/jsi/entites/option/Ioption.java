@@ -13,4 +13,5 @@ public interface Ioption {
 	public Option getOneOptionbyName(String name);
 	public Option getOneOptionbyUid(String uid);
 	public Option saveOption(Option option);
+	public List<Option> OptionOfEnsemble(String ensembleId);
 }

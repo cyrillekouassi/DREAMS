@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -27,7 +25,6 @@ import ci.jsi.entites.rolesDefinis.RolesDefinisRepository;
 import ci.jsi.entites.section.SectionRepository;
 import ci.jsi.entites.utilisateur.UserApp;
 import ci.jsi.entites.utilisateur.UserRepository;
-import ci.jsi.importExport.controller.StorageService;
 import ci.jsi.initialisation.Uid;
 
 @SpringBootApplication

@@ -43,7 +43,7 @@ saisie.config(['$stateProvider','$urlRouterProvider', function ($stateProvider,$
         templateUrl: 'views/fiche_reference_List.html',
         controller: 'ficheReferenceListCTRL'
     };
-    var vad = {
+    var ficheVAD = {
         name: 'ficheVAD',
         url: '/ficheVAD?prog&org&inst',
         templateUrl: 'views/fiche_VAD.html',
@@ -124,7 +124,7 @@ saisie.config(['$stateProvider','$urlRouterProvider', function ($stateProvider,$
     $stateProvider.state(groupeList);
     $stateProvider.state(reference);
     $stateProvider.state(referenceList);
-    $stateProvider.state(vad);
+    $stateProvider.state(ficheVAD);
     $stateProvider.state(vadList);
     $stateProvider.state(Enrol_List);
     $stateProvider.state(Enrol_SA);

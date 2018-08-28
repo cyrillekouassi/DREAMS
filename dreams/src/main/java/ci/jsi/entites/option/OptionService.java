@@ -66,6 +66,11 @@ public class OptionService implements Ioption {
 		}
 		return opt;
 	}
+	@Override
+	public List<Option> OptionOfEnsemble(String ensembleId) {
+		
+		return optionRepository.findAllByEnsembleOptionUid(ensembleId);
+	}
 
 	
 
