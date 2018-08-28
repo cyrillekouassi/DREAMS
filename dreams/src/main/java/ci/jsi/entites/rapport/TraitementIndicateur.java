@@ -5,11 +5,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.IsoFields;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ci.jsi.entites.beneficiaire.Beneficiaire;
 import ci.jsi.entites.beneficiaire.BeneficiaireTDO;
 import ci.jsi.entites.beneficiaire.Ibeneficiaire;
 import ci.jsi.entites.dataValue.DataInstance;
@@ -17,12 +19,15 @@ import ci.jsi.entites.dataValue.IdataValues;
 import ci.jsi.entites.element.Element;
 import ci.jsi.entites.element.Ielement;
 import ci.jsi.entites.instance.Instance;
+import ci.jsi.entites.option.Ioption;
+import ci.jsi.entites.option.Option;
 import ci.jsi.entites.organisation.Iorganisation;
 import ci.jsi.entites.organisation.OrganisationTDO;
 import ci.jsi.entites.organisationLevel.IorganisationLevel;
 import ci.jsi.entites.organisationLevel.OrganisationLevel;
 import ci.jsi.entites.programme.Iprogramme;
 import ci.jsi.entites.programme.ProgrammeTDO;
+import ci.jsi.initialisation.ConvertDate;
 import ci.jsi.initialisation.UidEntitie;
 
 @Service
@@ -42,19 +47,27 @@ public class TraitementIndicateur {
 	Irapport irapport;
 	@Autowired
 	Ibeneficiaire ibeneficiaire;
+	@Autowired
+	Ioption ioption;
+	@Autowired
+	ConvertDate convertDate;
 	
+	String InterventionDossierBeneficiaire [] = {"conceptSexualite", "conceptsGenre", "connaissanceCorpsOrgane", "aspectsNegatifs", "promotionDepistage", "participationActivites", "participationCauseries", "ecouteConseils", "suivi", "referenceVersExperts", "businessPlus", "participationAVEC","appuiScolaire", "fournitures", "uniformes", "autre", "alphabetisation", "utilisationPreservatifs", "distributionPreservatifs", "referencePreservatifs", "referencVersPF", "referenceServices","referenceMedical","referencePsychoSocial","referenceJuridique","referenceAbri","appuiMedicaux","appuiJuridiques","referenceNutritionnel","appuiDocument","sinovoyu","AVEC","educationFinanciere"};
+	List<Element> elementsIntervention = new ArrayList<Element>();
+	String InterventionPopCible [] = {"conceptSexualite", "conceptsGenre", "connaissanceCorpsOrgane", "aspectsNegatifs", "promotionDepistage","utilisationPreservatifs", "distributionPreservatifs", "referencePreservatifs","referenceServices"};
+	List<Element> elementsInterventionPopCible = new ArrayList<Element>();
 	String laPeriode = null;
 	String dateDebuts = "";
 	String dateFins = null;
 	List<OrganisationTDO> OrganisationTDOs;
 	OrganisationTDO organisationSelect;
-	String enrolementID = null;
-	String eligibiliteID = null;
-	String dossierBeneficiareID = null;
-	String besoinBeneficiareID = null;
-	String vadID = null;
-	String referenceID = null;
-	String groupeID = null;
+	ProgrammeTDO enrolement = null;
+	ProgrammeTDO eligibilite = null;
+	ProgrammeTDO dossierBeneficiare = null;
+	ProgrammeTDO besoinBeneficiare = null;
+	ProgrammeTDO vad = null;
+	ProgrammeTDO reference = null;
+	ProgrammeTDO groupe = null;
 	
 	int nouveau = 0;
 	int ancien = 0;
@@ -81,27 +94,36 @@ public class TraitementIndicateur {
 		programmeTDOs = iprogramme.getAllProgrammeTDO();
 		for(int i = 0;i<programmeTDOs.size();i++) {
 			if(programmeTDOs.get(i).getCode().equals("enrolement")) {
-				enrolementID = programmeTDOs.get(i).getId();
+				enrolement = programmeTDOs.get(i);
 			}
 			if(programmeTDOs.get(i).getCode().equals("eligibilite")) {
-				eligibiliteID = programmeTDOs.get(i).getId();
+				eligibilite = programmeTDOs.get(i);
 			}
 			if(programmeTDOs.get(i).getCode().equals("dossierBeneficiare")) {
-				dossierBeneficiareID = programmeTDOs.get(i).getId();
+				dossierBeneficiare = programmeTDOs.get(i);
 			}
 			if(programmeTDOs.get(i).getCode().equals("besoinBeneficiare")) {
-				besoinBeneficiareID = programmeTDOs.get(i).getId();
+				besoinBeneficiare = programmeTDOs.get(i);
 			}
 			if(programmeTDOs.get(i).getCode().equals("vad")) {
-				vadID = programmeTDOs.get(i).getId();
+				vad = programmeTDOs.get(i);
 			}
 			if(programmeTDOs.get(i).getCode().equals("reference")) {
-				referenceID = programmeTDOs.get(i).getId();
+				reference = programmeTDOs.get(i);
 			}
 			if(programmeTDOs.get(i).getCode().equals("groupe")) {
-				groupeID = programmeTDOs.get(i).getId();
+				groupe = programmeTDOs.get(i);
 			}
 		}
+		
+		for(int j = 0;j<InterventionDossierBeneficiaire.length;j++) {
+			elementsIntervention.add(ielement.getOneElmentByCode(InterventionDossierBeneficiaire[j]));
+		}
+		for(int j = 0;j<InterventionPopCible.length;j++) {
+			elementsInterventionPopCible.add(ielement.getOneElmentByCode(InterventionPopCible[j]));
+		}
+		System.err.println("fin execution InterventionDossierBeneficiaire = ");
+		
 	}
 		
 	private void executionPeriodeTrimestre() {
@@ -208,7 +230,7 @@ public class TraitementIndicateur {
 			chargeIndicateur();
 		}
 	}
-
+ 
 	private List<OrganisationTDO> getOrganisationTDOchildren(List<UidEntitie> childrens) {
 		List<OrganisationTDO> organisations = new ArrayList<OrganisationTDO>();
 		for(int a = 0;a<childrens.size();a++) {
@@ -306,7 +328,12 @@ public class TraitementIndicateur {
 		//nbreBenefEnrole();
 		//nbreBenefEnroleScolaireExtraScolaire();
 		//nbreBenefEnroleScolaireActifs();
-		
+		//nbreFilleIssusPopulation();
+		//nbreFilleReferePsychoSocial();
+		//nbreBeneficiaireCommunicationParentEnfant();
+		//nbreParentCommunicationParentEnfant();
+		//nbreFilleVAD();
+		//nbreFilleBesoinEducation();
 	}
 	
 	private void nbreBenefEnrole() {
@@ -321,7 +348,7 @@ public class TraitementIndicateur {
 		organisation.add(this.organisationSelect.getId());
 		Element element = ielement.getOneElmentByCode("age_enrol");
 		//nbreBenefEnrole NOUVEAU 
-		dataInstances = idataValues.dataAnalysePeriode(organisation, enrolementID, dateDebuts, dateFins);
+		dataInstances = idataValues.dataAnalysePeriode(organisation, enrolement.getId(), dateDebuts, dateFins);
 		nouveau = dataInstances.size();
 		
 		for(int i = 0;i<dataInstances.size();i++) {
@@ -340,7 +367,7 @@ public class TraitementIndicateur {
 		}
 		
 		//nbreBenefEnrole ANCIEN 
-		dataInstances = idataValues.dataAnalysePreview(organisation, enrolementID, dateDebuts);
+		dataInstances = idataValues.dataAnalysePreview(organisation, enrolement.getId(), dateDebuts);
 		ancien = dataInstances.size();
 		for(int i = 0;i<dataInstances.size();i++) {
 			for(int b =0;b<dataInstances.get(i).getDataValue().size();b++) {
@@ -390,7 +417,7 @@ public class TraitementIndicateur {
 		
 		
 		//nbreBenefEnrole NOUVEAU 
-		dataInstances = idataValues.dataAnalysePeriode(organisation, dossierBeneficiareID, dateDebuts, dateFins);
+		dataInstances = idataValues.dataAnalysePeriode(organisation, dossierBeneficiare.getId(), dateDebuts, dateFins);
 		nouveau = dataInstances.size();
 		
 		for(int i = 0;i<dataInstances.size();i++) {
@@ -398,6 +425,9 @@ public class TraitementIndicateur {
 				if(dataInstances.get(i).getDataValue().get(b).getElement().equals(element.getUid())) {
 					String porteEntree = dataInstances.get(i).getDataValue().get(b).getValue();
 					if(porteEntree.equals("ecole")) {
+						for(int inter =0;inter<dataInstances.get(i).getDataValue().size();inter++) {
+							
+						}
 						for(int ag =0;ag<dataInstances.get(i).getDataValue().size();ag++) {
 							if(dataInstances.get(i).getDataValue().get(ag).getElement().equals(ageEnrolElement.getUid())) {
 								int age = Integer.parseInt(dataInstances.get(i).getDataValue().get(ag).getValue());
@@ -429,7 +459,7 @@ public class TraitementIndicateur {
 		
 		
 		//nbreBenefEnrole ANCIEN 
-		dataInstances = idataValues.dataAnalysePreview(organisation, dossierBeneficiareID, dateDebuts);
+		dataInstances = idataValues.dataAnalysePreview(organisation, dossierBeneficiare.getId(), dateDebuts);
 		ancien = dataInstances.size();
 		for(int i = 0;i<dataInstances.size();i++) {
 			for(int b =0;b<dataInstances.get(i).getDataValue().size();b++) {
@@ -478,19 +508,19 @@ public class TraitementIndicateur {
 		
 	}
 
-	private void nbreBenefEnroleScolaireActifs() {
+	private void nbreBenefEnroleScolaireExtraScolaireActifs() {
 		List<String> organisation = new ArrayList<String>();
-		nouveau = 0;
-		ancien = 0;
+		//nouveau = 0;
+		//ancien = 0;
 		total = 0;
 		nouveau_10_14 = 0;
 		nouveau_15_19 = 0;
 		ancien_10_14 = 0;
 		ancien_15_19 = 0;
 		
-		int nouveauExtra = 0;
-		int ancienExtra = 0;
-		int totalExtra = 0;
+		//int nouveauExtra = 0;
+		//int ancienExtra = 0;
+		//int totalExtra = 0;
 		int nouveau_10_14Extra = 0;
 		int nouveau_15_19Extra = 0;
 		int ancien_10_14Extra = 0;
@@ -500,35 +530,49 @@ public class TraitementIndicateur {
 		Element element = ielement.getOneElmentByCode("porteEntree");
 		Element ageEnrolElement = ielement.getOneElmentByCode("age_enrol");
 		//nbreBenefEnrole NOUVEAU
-		dataInstances = idataValues.dataAnalysePeriode(organisation, dossierBeneficiareID, dateDebuts, dateFins);
-		nouveau = dataInstances.size();
+		dataInstances = idataValues.dataAnalysePeriode(organisation, dossierBeneficiare.getId(), dateDebuts, dateFins);
+		//nouveau = dataInstances.size();
 		
 		for(int i = 0;i<dataInstances.size();i++) {
 			for(int b =0;b<dataInstances.get(i).getDataValue().size();b++) {
 				if(dataInstances.get(i).getDataValue().get(b).getElement().equals(element.getUid())) {
 					String porteEntree = dataInstances.get(i).getDataValue().get(b).getValue();
 					if(porteEntree.equals("ecole")) {
-						for(int ag =0;ag<dataInstances.get(i).getDataValue().size();ag++) {
-							if(dataInstances.get(i).getDataValue().get(ag).getElement().equals(ageEnrolElement.getUid())) {
-								int age = Integer.parseInt(dataInstances.get(i).getDataValue().get(ag).getValue());
-								if(age < 15) {
-									nouveau_10_14++;
-								}else {
-									nouveau_15_19++;
+						for(int interv =0;interv<dataInstances.get(i).getDataValue().size();interv++) {
+							for(int eleInter = 0;eleInter <elementsIntervention.size();eleInter++) {
+								if(dataInstances.get(i).getDataValue().get(interv).getElement().equals(elementsIntervention.get(eleInter).getUid())) {
+									for(int ag =0;ag<dataInstances.get(i).getDataValue().size();ag++) {
+										if(dataInstances.get(i).getDataValue().get(ag).getElement().equals(ageEnrolElement.getUid())) {
+											int age = Integer.parseInt(dataInstances.get(i).getDataValue().get(ag).getValue());
+											if(age < 15) {
+												nouveau_10_14++;
+											}else {
+												nouveau_15_19++;
+											}
+											break;
+										}
+									}
 								}
-								break;
 							}
 						}
+						
 					}else {
-						for(int ag =0;ag<dataInstances.get(i).getDataValue().size();ag++) {
-							if(dataInstances.get(i).getDataValue().get(ag).getElement().equals(ageEnrolElement.getUid())) {
-								int age = Integer.parseInt(dataInstances.get(i).getDataValue().get(ag).getValue());
-								if(age < 15) {
-									nouveau_10_14Extra++;
-								}else {
-									nouveau_15_19Extra++;
+						for(int interv =0;interv<dataInstances.get(i).getDataValue().size();interv++) {
+							for(int eleInter = 0;eleInter <elementsIntervention.size();eleInter++) {
+								if(dataInstances.get(i).getDataValue().get(interv).getElement().equals(elementsIntervention.get(eleInter).getUid())) {
+									for(int ag =0;ag<dataInstances.get(i).getDataValue().size();ag++) {
+										if(dataInstances.get(i).getDataValue().get(ag).getElement().equals(ageEnrolElement.getUid())) {
+											int age = Integer.parseInt(dataInstances.get(i).getDataValue().get(ag).getValue());
+											if(age < 15) {
+												nouveau_10_14Extra++;
+											}else {
+												nouveau_15_19Extra++;
+											}
+											break;
+										}
+									}
+									break;
 								}
-								break;
 							}
 						}
 					}
@@ -539,34 +583,48 @@ public class TraitementIndicateur {
 		
 		
 		//nbreBenefEnrole ANCIEN 
-		dataInstances = idataValues.dataAnalysePreview(organisation, dossierBeneficiareID, dateDebuts);
-		ancien = dataInstances.size();
+		dataInstances = idataValues.dataAnalysePreview(organisation, dossierBeneficiare.getId(), dateDebuts);
+		//ancien = dataInstances.size();
 		for(int i = 0;i<dataInstances.size();i++) {
 			for(int b =0;b<dataInstances.get(i).getDataValue().size();b++) {
 				if(dataInstances.get(i).getDataValue().get(b).getElement().equals(element.getUid())) {
 					String porteEntree = dataInstances.get(i).getDataValue().get(b).getValue();
 					if(porteEntree.equals("ecole")) {
-						for(int ag =0;ag<dataInstances.get(i).getDataValue().size();ag++) {
-							if(dataInstances.get(i).getDataValue().get(ag).getElement().equals(ageEnrolElement.getUid())) {
-								int age = Integer.parseInt(dataInstances.get(i).getDataValue().get(ag).getValue());
-								if(age < 15) {
-									ancien_10_14++;
-								}else {
-									ancien_15_19++;
+						for(int interv =0;interv<dataInstances.get(i).getDataValue().size();interv++) {
+							for(int eleInter = 0;eleInter <elementsIntervention.size();eleInter++) {
+								if(dataInstances.get(i).getDataValue().get(interv).getElement().equals(elementsIntervention.get(eleInter).getUid())) {
+									for(int ag =0;ag<dataInstances.get(i).getDataValue().size();ag++) {
+										if(dataInstances.get(i).getDataValue().get(ag).getElement().equals(ageEnrolElement.getUid())) {
+											int age = Integer.parseInt(dataInstances.get(i).getDataValue().get(ag).getValue());
+											if(age < 15) {
+												ancien_10_14++;
+											}else {
+												ancien_15_19++;
+											}
+											break;
+										}
+									}
 								}
-								break;
 							}
 						}
+						
 					}else {
-						for(int ag =0;ag<dataInstances.get(i).getDataValue().size();ag++) {
-							if(dataInstances.get(i).getDataValue().get(ag).getElement().equals(ageEnrolElement.getUid())) {
-								int age = Integer.parseInt(dataInstances.get(i).getDataValue().get(ag).getValue());
-								if(age < 15) {
-									ancien_10_14Extra++;
-								}else {
-									ancien_15_19Extra++;
+						for(int interv =0;interv<dataInstances.get(i).getDataValue().size();interv++) {
+							for(int eleInter = 0;eleInter <elementsIntervention.size();eleInter++) {
+								if(dataInstances.get(i).getDataValue().get(interv).getElement().equals(elementsIntervention.get(eleInter).getUid())) {
+									for(int ag =0;ag<dataInstances.get(i).getDataValue().size();ag++) {
+										if(dataInstances.get(i).getDataValue().get(ag).getElement().equals(ageEnrolElement.getUid())) {
+											int age = Integer.parseInt(dataInstances.get(i).getDataValue().get(ag).getValue());
+											if(age < 15) {
+												ancien_10_14Extra++;
+											}else {
+												ancien_15_19Extra++;
+											}
+											break;
+										}
+									}
+									break;
 								}
-								break;
 							}
 						}
 					}
@@ -574,8 +632,9 @@ public class TraitementIndicateur {
 				}
 			}
 		}
-		total = nouveau + ancien;
-		enregistreRapport("nbreBenefEnroleScolaire");
+	
+		total = nouveau_10_14 + nouveau_15_19 + ancien_10_14 + ancien_15_19;
+		enregistreRapport("nbreBenefEnroleScolaireActifs");
 		//nouveau = nouveauExtra;
 		//ancien = ancienExtra;
 		//total = totalExtra;
@@ -583,13 +642,439 @@ public class TraitementIndicateur {
 		nouveau_15_19 = nouveau_15_19Extra;
 		ancien_10_14 = ancien_10_14Extra;
 		ancien_15_19 = ancien_15_19Extra;
-		enregistreRapport("nbreBenefEnroleExtraScolaire");
+		total = nouveau_10_14 + nouveau_15_19 + ancien_10_14 + ancien_15_19;
+		enregistreRapport("nbreBenefEnroleExtraScolaireActifs");
 		
 		
 	}
 
+	private void nbreFilleIssusPopulation() {
+		List<String> organisation = new ArrayList<String>();
+		List<Option> options = new ArrayList<Option>();
+		total = 0;
+		nouveau_10_14 = 0;
+		nouveau_15_19 = 0;
+		ancien_10_14 = 0;
+		ancien_15_19 = 0;
+		
+		
+		organisation.add(this.organisationSelect.getId());
+		Element ageEnrolElement = ielement.getOneElmentByCode("age_enrol");
+		//nbreBenefEnrole NOUVEAU
+		dataInstances = idataValues.dataAnalysePeriode(organisation, dossierBeneficiare.getId(), dateDebuts, dateFins);
+		
+		for(int i = 0;i<dataInstances.size();i++) {
+			int nbreOption = 0; 
+			int nbreObtenu = 0;
+			for(int interv =0;interv<elementsInterventionPopCible.size();interv++) {
+				options = ioption.OptionOfEnsemble(elementsInterventionPopCible.get(interv).getEnsembleOption().getUid());
+				nbreOption += options.size();
+				for(int b =0;b<dataInstances.get(i).getDataValue().size();b++) {
+					 if(dataInstances.get(i).getDataValue().get(b).getElement().equals(elementsInterventionPopCible.get(interv).getUid())) {
+						 String ElementValue = dataInstances.get(i).getDataValue().get(b).getValue();
+						 for(int opt = 0; opt<options.size();opt++) {
+							 if(ElementValue.indexOf(options.get(opt).getCode()) != -1) {
+								 nbreObtenu++;
+							 }
+						 }
+					 }
+				}
+			}
+			for(int ag =0;ag<dataInstances.get(i).getDataValue().size();ag++) {
+				if(dataInstances.get(i).getDataValue().get(ag).getElement().equals(ageEnrolElement.getUid())) {
+					int age = Integer.parseInt(dataInstances.get(i).getDataValue().get(ag).getValue());
+					if(nbreOption == nbreObtenu) {
+						if(age < 15) {
+							nouveau_10_14++;
+						}else {
+							nouveau_15_19++;
+						}
+						break;
+					}
+				}
+			}
+		}
+		
+		
+		//BenefEnrole ANCIEN 
+		dataInstances = idataValues.dataAnalysePreview(organisation, dossierBeneficiare.getId(), dateDebuts);
+		for(int i = 0;i<dataInstances.size();i++) {
+			int nbreOption = 0; 
+			int nbreObtenu = 0;
+			for(int interv =0;interv<elementsInterventionPopCible.size();interv++) {
+				options = ioption.OptionOfEnsemble(elementsInterventionPopCible.get(interv).getEnsembleOption().getUid());
+				nbreOption += options.size();
+				for(int b =0;b<dataInstances.get(i).getDataValue().size();b++) {
+					 if(dataInstances.get(i).getDataValue().get(b).getElement().equals(elementsInterventionPopCible.get(interv).getUid())) {
+						 String ElementValue = dataInstances.get(i).getDataValue().get(b).getValue();
+						 for(int opt = 0; opt<options.size();opt++) {
+							 if(ElementValue.indexOf(options.get(opt).getCode()) != -1) {
+								 nbreObtenu++;
+							 }
+						 }
+					 }
+				}
+			}
+			for(int ag =0;ag<dataInstances.get(i).getDataValue().size();ag++) {
+				if(dataInstances.get(i).getDataValue().get(ag).getElement().equals(ageEnrolElement.getUid())) {
+					int age = Integer.parseInt(dataInstances.get(i).getDataValue().get(ag).getValue());
+					if(nbreOption == nbreObtenu) {
+						if(age < 15) {
+							ancien_10_14++;
+						}else {
+							ancien_15_19++;
+						}
+						break;
+					}
+				}
+			}
+		}
+		
 	
+		total = nouveau_10_14 + nouveau_15_19 + ancien_10_14 + ancien_15_19;
+		enregistreRapport("nbreFilleIssusPopulation");
+		
+		
+		
+	}
+
+	private void nbreFilleReferePsychoSocial() {
+		List<String> organisation = new ArrayList<String>();
+		List<Option> options = new ArrayList<Option>();
+		total = 0;
+		nouveau_10_14 = 0;
+		nouveau_15_19 = 0;
+		ancien_10_14 = 0;
+		ancien_15_19 = 0;
+		
+		
+		organisation.add(this.organisationSelect.getId());
+		Element refPsychoElement = ielement.getOneElmentByCode("referencePsychoSocial");
+		Element ageEnrolElement = ielement.getOneElmentByCode("age_enrol");
+		//nbreBenefEnrole NOUVEAU
+		dataInstances = idataValues.dataAnalysePeriode(organisation, dossierBeneficiare.getId(), dateDebuts, dateFins);
+
+		for (int i = 0; i < dataInstances.size(); i++) {
+			for (int b = 0; b < dataInstances.get(i).getDataValue().size(); b++) {
+				if (dataInstances.get(i).getDataValue().get(b).getElement().equals(refPsychoElement.getUid())) {
+					if (dataInstances.get(i).getDataValue().get(b).getValue() != null
+							&& !dataInstances.get(i).getDataValue().get(b).getValue().equals("")) {
+						for (int ag = 0; ag < dataInstances.get(i).getDataValue().size(); ag++) {
+							if (dataInstances.get(i).getDataValue().get(ag).getElement()
+									.equals(ageEnrolElement.getUid())) {
+								int age = Integer.parseInt(dataInstances.get(i).getDataValue().get(ag).getValue());
+								if (age < 15) {
+									nouveau_10_14++;
+								} else {
+									nouveau_15_19++;
+								}
+								break;
+
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		//BenefEnrole ANCIEN 
+		dataInstances = idataValues.dataAnalysePreview(organisation, dossierBeneficiare.getId(), dateDebuts);
+		for (int i = 0; i < dataInstances.size(); i++) {
+			for (int b = 0; b < dataInstances.get(i).getDataValue().size(); b++) {
+				if (dataInstances.get(i).getDataValue().get(b).getElement().equals(refPsychoElement.getUid())) {
+					if (dataInstances.get(i).getDataValue().get(b).getValue() != null
+							&& !dataInstances.get(i).getDataValue().get(b).getValue().equals("")) {
+						for (int ag = 0; ag < dataInstances.get(i).getDataValue().size(); ag++) {
+							if (dataInstances.get(i).getDataValue().get(ag).getElement()
+									.equals(ageEnrolElement.getUid())) {
+								int age = Integer.parseInt(dataInstances.get(i).getDataValue().get(ag).getValue());
+								if (age < 15) {
+									ancien_10_14++;
+								} else {
+									ancien_15_19++;
+								}
+								break;
+
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		
 	
+		total = nouveau_10_14 + nouveau_15_19 + ancien_10_14 + ancien_15_19;
+		enregistreRapport("nbreFilleReferePsychoSocial");
+		
+		
+		
+	}
+
+	private void nbreBeneficiaireCommunicationParentEnfant() {
+		List<String> organisation = new ArrayList<String>();
+		List<Option> options = new ArrayList<Option>();
+		total = 0;
+		nouveau_10_14 = 0;
+		nouveau_15_19 = 0;
+		ancien_10_14 = 0;
+		ancien_15_19 = 0;
+		
+		
+		organisation.add(this.organisationSelect.getId());
+		Element sinovoyuElement = ielement.getOneElmentByCode("sinovoyu");
+		Element ageEnrolElement = ielement.getOneElmentByCode("age_enrol");
+		//nbreBenefEnrole NOUVEAU
+		dataInstances = idataValues.dataAnalysePeriode(organisation, dossierBeneficiare.getId(), dateDebuts, dateFins);
+
+		for (int i = 0; i < dataInstances.size(); i++) {
+			for (int b = 0; b < dataInstances.get(i).getDataValue().size(); b++) {
+				if (dataInstances.get(i).getDataValue().get(b).getElement().equals(sinovoyuElement.getUid())) {
+					if (dataInstances.get(i).getDataValue().get(b).getValue() != null
+							&& !dataInstances.get(i).getDataValue().get(b).getValue().equals("")) {
+						for (int ag = 0; ag < dataInstances.get(i).getDataValue().size(); ag++) {
+							if (dataInstances.get(i).getDataValue().get(ag).getElement()
+									.equals(ageEnrolElement.getUid())) {
+								int age = Integer.parseInt(dataInstances.get(i).getDataValue().get(ag).getValue());
+								if (age < 15) {
+									nouveau_10_14++;
+								} else {
+									nouveau_15_19++;
+								}
+								break;
+
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		//BenefEnrole ANCIEN 
+		dataInstances = idataValues.dataAnalysePreview(organisation, dossierBeneficiare.getId(), dateDebuts);
+		for (int i = 0; i < dataInstances.size(); i++) {
+			for (int b = 0; b < dataInstances.get(i).getDataValue().size(); b++) {
+				if (dataInstances.get(i).getDataValue().get(b).getElement().equals(sinovoyuElement.getUid())) {
+					if (dataInstances.get(i).getDataValue().get(b).getValue() != null
+							&& !dataInstances.get(i).getDataValue().get(b).getValue().equals("")) {
+						for (int ag = 0; ag < dataInstances.get(i).getDataValue().size(); ag++) {
+							if (dataInstances.get(i).getDataValue().get(ag).getElement()
+									.equals(ageEnrolElement.getUid())) {
+								int age = Integer.parseInt(dataInstances.get(i).getDataValue().get(ag).getValue());
+								if (age < 15) {
+									ancien_10_14++;
+								} else {
+									ancien_15_19++;
+								}
+								break;
+
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		
+	
+		total = nouveau_10_14 + nouveau_15_19 + ancien_10_14 + ancien_15_19;
+		enregistreRapport("nbreBeneficiaireCommunicationParentEnfant");
+		
+		
+		
+	}
+
+	private void nbreParentCommunicationParentEnfant() {
+		List<String> organisation = new ArrayList<String>();
+		total = 0;
+		nouveau_10_14 = 0;
+		nouveau_15_19 = 0;
+		ancien_10_14 = 0;
+		ancien_15_19 = 0;
+		
+		
+		organisation.add(this.organisationSelect.getId());
+		Element thematiqueElement = ielement.getOneElmentByCode("thematique");
+		Element nomPrenomAutreCibleElement = ielement.getOneElmentByCode("nomPrenomAutreCible");
+		//nbreBenefEnrole NOUVEAU
+		dataInstances = idataValues.dataAnalysePreview(organisation, groupe.getId(), dateFins);
+		for (int i = 0; i < dataInstances.size(); i++) {
+			for (int b = 0; b < dataInstances.get(i).getDataValue().size(); b++) {
+				if (dataInstances.get(i).getDataValue().get(b).getElement().equals(thematiqueElement.getUid())) {
+					
+					if (dataInstances.get(i).getDataValue().get(b).getValue().equals("sinovoyu")) {
+						for (int pers = 0; pers < dataInstances.get(i).getDataValue().size(); pers++) {
+							if(dataInstances.get(i).getDataValue().get(pers).getElement().equals(nomPrenomAutreCibleElement.getUid())) {
+								if(dataInstances.get(i).getDataValue().get(pers).getValue() != null && !dataInstances.get(i).getDataValue().get(pers).getValue().equals("")) {
+									total++;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+			
+		enregistreRapport("nbreParentCommunicationParentEnfant");
+	}
+	
+	private void nbreFilleVAD() {
+		List<String> organisation = new ArrayList<String>();
+		List<BeneficiaireTDO> beneficiaireTDOs = new ArrayList<BeneficiaireTDO>();
+		total = 0;
+		nouveau_10_14 = 0;
+		nouveau_15_19 = 0;
+		ancien_10_14 = 0;
+		ancien_15_19 = 0;
+				
+		organisation.add(this.organisationSelect.getId());
+		Element idDreamsElement = ielement.getOneElmentByCode("id_dreams");
+		
+		//BenefEnrole NOUVEAU
+		dataInstances = idataValues.dataAnalysePeriode(organisation, vad.getId(), dateDebuts, dateFins);
+		beneficiaireTDOs = ibeneficiaire.getBeneficiairePeriode(organisation, dateDebuts, dateFins);
+		for (int i = 0; i < dataInstances.size(); i++) {
+			for (int b = 0; b < dataInstances.get(i).getDataValue().size(); b++) {
+				if (dataInstances.get(i).getDataValue().get(b).getElement().equals(idDreamsElement.getUid())) {
+					boolean trouve = false;
+					int age = 0;
+					for(int benef = 0; benef < beneficiaireTDOs.size(); benef++) {
+						if(dataInstances.get(i).getDataValue().get(b).getValue().equals(beneficiaireTDOs.get(benef).getId_dreams())) {
+							age = Integer.parseInt(beneficiaireTDOs.get(benef).getAgeEnrolement());
+							trouve = true;
+						}
+					}
+					if(trouve) {
+						if(age < 15) {
+							nouveau_10_14++;
+						}else {
+							nouveau_15_19++;
+						}
+					}else {
+						if(age < 15) {
+							ancien_10_14++;
+						}else {
+							ancien_15_19++;
+						}
+					}
+					break;
+				}
+			}
+		}
+		//BenefEnrole Ancien
+		dataInstances = idataValues.dataAnalysePreview(organisation, vad.getId(), dateDebuts);
+		beneficiaireTDOs = ibeneficiaire.getBeneficiairePreview(organisation, dateDebuts);
+		
+		for (int benef = 0; benef < beneficiaireTDOs.size(); benef++) {
+			boolean trouve = false;
+			int age = 0;
+			for (int i = 0; i < dataInstances.size(); i++) {
+				for (int b = 0; b < dataInstances.get(i).getDataValue().size(); b++) {
+					if (dataInstances.get(i).getDataValue().get(b).getElement().equals(idDreamsElement.getUid())) {
+						if (dataInstances.get(i).getDataValue().get(b).getValue()
+								.equals(beneficiaireTDOs.get(benef).getId_dreams())) {
+							age = Integer.parseInt(beneficiaireTDOs.get(benef).getAgeEnrolement());
+							trouve = true;
+							break;
+						}
+						break;
+					}
+				}
+			}
+			if (trouve) {
+				if (age < 15) {
+					ancien_10_14++;
+				} else {
+					ancien_15_19++;
+				}
+			}
+		}
+		total = nouveau_10_14 + nouveau_15_19 + ancien_10_14 + ancien_15_19;
+		
+		enregistreRapport("nbreFilleVAD");
+	}
+
+	private void nbreFilleBesoinEducation() {
+		List<String> organisation = new ArrayList<String>();
+		List<BeneficiaireTDO> beneficiaireTDOs = new ArrayList<BeneficiaireTDO>();
+		total = 0;
+		nouveau_10_14 = 0;
+		nouveau_15_19 = 0;
+		ancien_10_14 = 0;
+		ancien_15_19 = 0;
+				
+		organisation.add(this.organisationSelect.getId());
+		Element idDreamsElement = ielement.getOneElmentByCode("id_dreams");
+		Element soutienEducatifElement = ielement.getOneElmentByCode("soutienEducatif");
+		
+		//BenefEnrole NOUVEAU
+		dataInstances = idataValues.dataAnalysePeriode(organisation, dossierBeneficiare.getId(), dateDebuts, dateFins);
+		beneficiaireTDOs = ibeneficiaire.getBeneficiairePeriode(organisation, dateDebuts, dateFins);
+		for (int benef = 0; benef < beneficiaireTDOs.size(); benef++) {
+			boolean trouve = false;
+			int age = 0;
+			for (int i = 0; i < dataInstances.size(); i++) {
+				for (int b = 0; b < dataInstances.get(i).getDataValue().size(); b++) {
+					if (dataInstances.get(i).getDataValue().get(b).getElement().equals(idDreamsElement.getUid())) {
+						if(dataInstances.get(i).getDataValue().get(b).getValue().equals(beneficiaireTDOs.get(benef).getId_dreams())) {
+							for (int sout = 0; sout < dataInstances.get(i).getDataValue().size(); sout++) {
+								if(dataInstances.get(i).getDataValue().get(sout).getElement().equals(soutienEducatifElement.getUid())) {
+									if(dataInstances.get(i).getDataValue().get(sout).getValue() != null && !dataInstances.get(i).getDataValue().get(sout).getValue().equals("")) {
+										age = Integer.parseInt(beneficiaireTDOs.get(benef).getAgeEnrolement());
+										trouve = true;
+									}
+								}
+							}
+							
+						}
+					}
+				}
+			}
+			if(trouve) {
+				if(age < 15) {
+					nouveau_10_14++;
+				}else {
+					nouveau_15_19++;
+				}
+			}
+		}
+		//BenefEnrole Ancien
+		dataInstances = idataValues.dataAnalysePreview(organisation, dossierBeneficiare.getId(), dateDebuts);
+		beneficiaireTDOs = ibeneficiaire.getBeneficiairePreview(organisation, dateDebuts);
+		for (int benef = 0; benef < beneficiaireTDOs.size(); benef++) {
+			boolean trouve = false;
+			int age = 0;
+			for (int i = 0; i < dataInstances.size(); i++) {
+				for (int b = 0; b < dataInstances.get(i).getDataValue().size(); b++) {
+					if (dataInstances.get(i).getDataValue().get(b).getElement().equals(idDreamsElement.getUid())) {
+						if(dataInstances.get(i).getDataValue().get(b).getValue().equals(beneficiaireTDOs.get(benef).getId_dreams())) {
+							for (int sout = 0; sout < dataInstances.get(i).getDataValue().size(); sout++) {
+								if(dataInstances.get(i).getDataValue().get(sout).getElement().equals(soutienEducatifElement.getUid())) {
+									if(dataInstances.get(i).getDataValue().get(sout).getValue() != null && !dataInstances.get(i).getDataValue().get(sout).getValue().equals("")) {
+										age = Integer.parseInt(beneficiaireTDOs.get(benef).getAgeEnrolement());
+										trouve = true;
+									}
+								}
+							}
+							
+						}
+					}
+				}
+			}
+			if(trouve) {
+				if (age < 15) {
+					ancien_10_14++;
+				} else {
+					ancien_15_19++;
+				}
+			}
+		}
+		
+		total = nouveau_10_14 + nouveau_15_19 + ancien_10_14 + ancien_15_19;
+		
+		enregistreRapport("nbreFilleBesoinEducation");
+	}
+
 	
 	
 	
